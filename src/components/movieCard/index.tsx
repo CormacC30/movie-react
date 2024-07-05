@@ -25,11 +25,6 @@ const styles = {
   },
 };
 
-// interface MovieListProps {
-//   movie: ListedMovie,
-//   action: (m: ListedMovie) => React.ReactNode;
-// }
-
 interface MovieCardProps  {
   movie: BaseMovieProps;
   action: (m: BaseMovieProps) => React.ReactNode;
@@ -38,19 +33,16 @@ interface MovieCardProps  {
 const MovieCard: React.FC<MovieCardProps> = ({movie, action}) => {
 const { favourites } = useContext(MoviesContext);
 
+const isFavourite = favourites.includes(movie.id);
+
 if (favourites.find((id) => id === movie.id))
 movie.favourite = true;
-
-  // const handleAddToFavourite = (e: MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   addToFavourites(movie);
-  // };
 
   return (
     <Card sx={styles.card}>
       <CardHeader
         avatar={
-          movie.favourite ? (
+          isFavourite ? (
             <Avatar sx={styles.avatar}>
               <FavoriteIcon />
             </Avatar>
