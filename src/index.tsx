@@ -30,7 +30,7 @@ const App = () => {
         <SiteHeader />
         <MediaContextProvider>
           <Routes>
-            <Route path="/movies/toprated" element={<TopRatedMoviesPage />} />
+            <Route path="/toprated" element={<TopRatedMoviesPage />} />
             <Route path="/reviews/form" element={<AddMovieReviewPage />} />
             <Route path="/reviews/:id" element={<MovieReviewPage />} />
             <Route
