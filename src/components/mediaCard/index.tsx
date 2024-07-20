@@ -31,11 +31,16 @@ interface MediaCardProps {
 }
 
 const MediaCard: React.FC<MediaCardProps> = ({ media, action }) => {
-  const { favourites } = useContext(MediaContext); // Adjust the context if needed
+  const { favouriteMovies, favouriteTVSeries } = useContext(MediaContext);
 
-  const isFavourite = favourites.includes(media.id);
+    const isFavourite = media.title
+    ? favouriteMovies.includes(media.id)
+    : favouriteTVSeries.includes(media.id);
 
-  if (favourites.find((id) => id === media.id))
+  if (favouriteMovies.find((id) => id === media.id)) 
+    media.favourite = true;
+
+  if (favouriteTVSeries.find((id) => id === media.id)) 
     media.favourite = true;
 
   const title = media.title || media.name; // Handle both movie and TV series titles

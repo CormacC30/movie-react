@@ -44,7 +44,7 @@ const ReviewForm: React.FC<BaseMediaProps> = (movie) => {
     
       const handleSnackClose = () => {
         setOpen(false);
-        navigate("/movies/favourites");
+        navigate("/favourites");
       };
 
       const onSubmit: SubmitHandler<Review> = (review) => {
