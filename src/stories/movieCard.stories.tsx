@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MovieCard from "../components/movieCard";
+import MovieCard from "../components/mediaCard";
 import SampleMovie from "./sampleData";
 import { MemoryRouter } from "react-router";
-import MoviesContextProvider from "../contexts/moviesContext";
+import MoviesContextProvider from "../contexts/mediaContext";
 import { action } from "@storybook/addon-actions";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import React from 'react';

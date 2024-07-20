@@ -5,16 +5,16 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { MoviesContext } from "../../contexts/moviesContext";
+import { MediaContext } from "../../contexts/mediaContext";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles";
 import ratings from "./ratingCategories";
-import { BaseMovieProps, Review } from "../../types/interfaces";
+import { BaseMediaProps, Review } from "../../types/interfaces";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 
-const ReviewForm: React.FC<BaseMovieProps> = (movie) => {
+const ReviewForm: React.FC<BaseMediaProps> = (movie) => {
     const defaultValues = {
         defaultValues: {
           author: "",
@@ -33,7 +33,7 @@ const ReviewForm: React.FC<BaseMovieProps> = (movie) => {
       } = useForm<Review>(defaultValues);
     
       const navigate = useNavigate();
-      const context = useContext(MoviesContext);
+      const context = useContext(MediaContext);
       const [rating, setRating] = useState(3);
     
       const [open, setOpen] = useState(false);  //NEW

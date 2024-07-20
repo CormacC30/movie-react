@@ -1,29 +1,34 @@
-export interface BaseMovieProps {
-    title: string;
-    budget: number;
-    homepage: string | undefined;
+export interface BaseMediaProps {
+    title?: string;
+    name?: string,
+    budget?: number;
+    homepage?: string | undefined;
+    origin_country?: string;
     id: number;
-    imdb_id: string;
+    imdb_id?: string;
     original_language: string;
+    original_name?: string;
     overview: string;
-    release_date: string;
+    release_date?: string;
+    first_air_date?: string;
     vote_average: number;
     popularity: number;
     poster_path?: string;
-    tagline: string;
-    runtime: number;
-    revenue: number;
+    tagline?: string;
+    runtime?: number;
+    revenue?: number;
     vote_count: number;
     favourite?: boolean;
     genre_ids?: number[];
+    backdrop_path?: string;
   }
 
-  export interface BaseMovieListProps {
-    movies: BaseMovieProps[];
-    action: (m: BaseMovieProps) => React.ReactNode;
+  export interface BaseMediaListProps {
+    media: BaseMediaProps[];
+    action: (m: BaseMediaProps) => React.ReactNode;
   }
 
-  export interface MovieDetailsProps extends BaseMovieProps {
+  export interface MovieDetailsProps extends BaseMediaProps {
     genres: {
         id: number;
         name: string;
@@ -52,7 +57,7 @@ export interface BaseMovieProps {
 
   export type FilterOption = "title" | "genre";
 
-  export interface MovieListPageTemplateProps extends BaseMovieListProps {
+  export interface MediaListPageTemplateProps extends BaseMediaListProps {
     title: string;
   }
 
@@ -69,11 +74,11 @@ export interface BaseMovieProps {
     }[];
   }
 
-  export interface DiscoverMovies {
+  export interface DiscoverMedia {
     page: number;
     total_pages: number;
     total_results: number;
-    results: BaseMovieProps[];
+    results: BaseMediaProps[];
   }
 
   export interface Review {

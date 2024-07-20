@@ -8,7 +8,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import { MovieDetailsProps } from "../../types/interfaces"; 
 import { Avatar } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { MoviesContext } from "../../contexts/moviesContext";
+import { MediaContext } from "../../contexts/mediaContext";
 
 const styles = {
     root: {  
@@ -27,7 +27,7 @@ const MovieHeader: React.FC<MovieDetailsProps> = (movie) => {
 
   let isFavourite: boolean = false;
     
-  const { favourites } = useContext(MoviesContext);
+  const { favourites } = useContext(MediaContext);
   if (favourites.find((id) => id === movie.id))
     isFavourite = true;
 

@@ -9,7 +9,7 @@ import SiteHeader from "./components/siteHeader";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import MoviesContextProvider from "./contexts/moviesContext";
+import MediaContextProvider from "./contexts/mediaContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import TopRatedMoviesPage from "./pages/topRatedPage";
 
@@ -28,7 +28,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <SiteHeader />
-        <MoviesContextProvider>
+        <MediaContextProvider>
           <Routes>
             <Route path="/movies/toprated" element={<TopRatedMoviesPage />} />
             <Route path="/reviews/form" element={<AddMovieReviewPage />} />
@@ -42,7 +42,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-        </MoviesContextProvider>
+        </MediaContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

@@ -7,7 +7,7 @@ import { useQuery } from "react-query";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import { IconButton } from "@mui/material";
-import { useMovies } from '../contexts/moviesContext';
+import { useMovies } from '../contexts/mediaContext';
 
 const UpcomingMoviesPage: React.FC = () => {
   const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>("upcoming movies", getUpcomingMovies);
