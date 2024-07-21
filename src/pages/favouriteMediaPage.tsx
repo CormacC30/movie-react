@@ -10,11 +10,12 @@ import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { BaseMediaProps } from "../types/interfaces";
 
 const titleFiltering = {
   name: "title",
   value: "",
-  condition: titleFilter,
+  condition: (media: BaseMediaProps) => titleFilter(media, ""),
 };
 const genreFiltering = {
   name: "genre",
@@ -49,8 +50,8 @@ const FavouriteMoviesPage: React.FC = () => {
     return <Spinner />;
   }
 
-  const allFavouriteMovies = favouriteMovieQueries.map((q) => q.data);
-  const allFavouriteTVSeries = favouriteTVSeriesQueries.map((q) => q.data);
+  const allFavouriteMovies = favouriteMovieQueries.map((q) => q.data).filter(Boolean); // Filter out undefined values
+  const allFavouriteTVSeries = favouriteTVSeriesQueries.map((q) => q.data).filter(Boolean); // Filter out undefined values
   const displayedMedia = tabIndex === 0
     ? filterFunction(allFavouriteMovies)
     : filterFunction(allFavouriteTVSeries);
