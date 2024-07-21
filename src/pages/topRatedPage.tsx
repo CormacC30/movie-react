@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { DiscoverMedia, BaseMediaProps } from "../types/interfaces";
 import { getTopRatedMovies, getTopRatedTVSeries } from "../api/tmdb-api";
@@ -51,8 +51,6 @@ return (
 );
 
 };
-
-
 
 export default TopRatedMoviesPage;
 

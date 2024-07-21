@@ -6,7 +6,7 @@ import MoviePage from "./pages/movieDetailsPage";
 import FavouriteMediaPage from "./pages/favouriteMediaPage";
 import MovieReviewPage from "./pages/movieReviewPage";
 import SiteHeader from "./components/siteHeader";
-import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
+import UpcomingMoviesPage from "./pages/upcomingPage";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import MediaContextProvider from "./contexts/mediaContext";
