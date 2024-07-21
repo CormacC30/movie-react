@@ -23,6 +23,14 @@ const genreFiltering = {
   condition: genreFilter,
 };
 
+// need this function - could get genres raw from the returned data
+const transformData = (media: any): BaseMediaProps => {
+  return {
+    ...media,
+    genre_ids: media.genres ? media.genres.map((genre: any) => genre.id) : media.genre_ids,
+  };
+};
+
 const FavouriteMoviesPage: React.FC = () => {
   const { favouriteMovies, favouriteTVSeries } = useContext(MediaContext);
   const [tabIndex, setTabIndex] = useState(0);
@@ -31,14 +39,14 @@ const FavouriteMoviesPage: React.FC = () => {
   const favouriteMovieQueries = useQueries(
     favouriteMovies.map((movieId) => ({
       queryKey: ["movie", movieId],
-      queryFn: () => getMovie(movieId.toString())
+      queryFn: async() => transformData(await getMovie(movieId.toString()))
     }))
   );
 
   const favouriteTVSeriesQueries = useQueries(
     favouriteTVSeries.map((tvId) => ({
       queryKey: ["tv", tvId],
-      queryFn: () => getTVShow(tvId.toString())
+      queryFn: async () => transformData(await getTVShow(tvId.toString()))
     }))
   );
 
@@ -52,6 +60,14 @@ const FavouriteMoviesPage: React.FC = () => {
 
   const allFavouriteMovies = favouriteMovieQueries.map((q) => q.data).filter(Boolean); // Filter out undefined values
   const allFavouriteTVSeries = favouriteTVSeriesQueries.map((q) => q.data).filter(Boolean); // Filter out undefined values
+  
+    // Debugging: Ensure genre_ids are present in media data
+    console.log("All Favourite Movies:", allFavouriteMovies);
+    console.log("All Favourite TV Series:", allFavouriteTVSeries);
+    allFavouriteMovies.forEach(movie => console.log("Movie genres:", movie.genre_ids));
+    allFavouriteTVSeries.forEach(tv => console.log("TV genres:", tv.genre_ids));
+  
+  
   const displayedMedia = tabIndex === 0
     ? filterFunction(allFavouriteMovies)
     : filterFunction(allFavouriteTVSeries);

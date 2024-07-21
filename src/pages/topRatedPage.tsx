@@ -49,7 +49,9 @@ const TopRatedPage: React.FC = () => {
     setFilterValues(updatedFilterSet);
   };
 
-  const displayedMedia = filterFunction(media || []);
+  const movies = movieData ? movieData.results : [];
+  const tvSeries = tvData ? tvData.results : [];
+  const displayedMedia = tabIndex === 0 ? filterFunction(movies) : filterFunction(tvSeries);
 
   return (
     <>

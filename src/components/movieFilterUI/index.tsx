@@ -12,8 +12,7 @@ export const titleFilter = (media: BaseMediaProps, value: string): boolean => {
 export const genreFilter = (media: BaseMediaProps, value: string) => {
   const genreId = Number(value);
   const genreIds = media.genre_ids || [];
-  console.log("Filtering by genre:", genreId, "Media genre_ids:", genreIds);
-  return genreId > 0 && genreIds ? genreIds.includes(genreId) : true;
+  return genreId > 0 ? genreIds.includes(genreId) : true;
 };
 
 const styles = {
