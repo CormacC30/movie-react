@@ -15,7 +15,7 @@ import { BaseMediaProps } from "../types/interfaces";
 const titleFiltering = {
   name: "title",
   value: "",
-  condition: (media: BaseMediaProps) => titleFilter(media, ""),
+  condition: titleFilter,
 };
 const genreFiltering = {
   name: "genre",
@@ -55,7 +55,6 @@ const FavouriteMoviesPage: React.FC = () => {
   const displayedMedia = tabIndex === 0
     ? filterFunction(allFavouriteMovies)
     : filterFunction(allFavouriteTVSeries);
-
   const changeFilterValues = (type: string, value: string) => {
     const changedFilter = { name: type, value: value };
     const updatedFilterSet = type === "title"

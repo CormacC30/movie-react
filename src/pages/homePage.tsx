@@ -16,7 +16,7 @@ import Tab from "@mui/material/Tab";
 const titleFiltering = {
   name: "title",
   value: "",
-  condition: (media: BaseMediaProps) => titleFilter(media, ""),  // Provide an initial value to the titleFilter
+  condition: titleFilter,  // Provide an initial value to the titleFilter
 };
 const genreFiltering = {
   name: "genre",
@@ -29,7 +29,6 @@ const HomePage: React.FC = () => {
   const [tvSeriesData, setTVSeriesData] = useState<DiscoverMedia | null>(null);
   const { data: movieData, error: movieError, isLoading: movieLoading, isError: movieIsError } = useQuery<DiscoverMedia, Error>("discoverMovies", getMovies);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
-   // [],
     [titleFiltering, genreFiltering]
   );
 
