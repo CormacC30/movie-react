@@ -3,8 +3,8 @@ import MovieHeader from "../headerMovie";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { getMovieImages } from "../../api/tmdb-api";
-import { MovieImage, MovieDetailsProps } from "../../types/interfaces";
+import { getMovieImages, getTVSeriesImages } from "../../api/tmdb-api";
+import { MovieImage, MovieDetailsProps, TVSeriesDetailsProps } from "../../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
 
@@ -20,15 +20,18 @@ const styles = {
     },
 };
 
-interface TemplateMoviePageProps {
-    movie: MovieDetailsProps,
+interface TemplateMediaPageProps {
+    media: MovieDetailsProps | TVSeriesDetailsProps;
+    type: "movie" | "tv"
     children: React.ReactElement;
 }
 
-const TemplateMoviePage: React.FC<TemplateMoviePageProps> = ({movie, children}) => {
+const TemplateMediaPage: React.FC<TemplateMediaPageProps> = ({media, type, children}) => {
+    const queryKey = type === "movie" ? ["images", media.id] : ["tvImages", media.id];
+    const fetchImages = type === "movie" ? getMovieImages : getTVSeriesImages;
     const { data, error, isLoading, isError } = useQuery<MovieImage[], Error>(
-        ["images", movie.id],
-        () => getMovieImages(movie.id)
+        queryKey,
+        () => fetchImages(media.id)
     );
 
     if (isLoading) {
@@ -45,7 +48,7 @@ const TemplateMoviePage: React.FC<TemplateMoviePageProps> = ({movie, children}) 
 
     return (
         <>
-        <MovieHeader {...movie} />
+        <MovieHeader {...media} />
 
         <Grid container spacing={5} style={{ padding: "15px" }}>
             <Grid item xs={3}>
@@ -75,4 +78,4 @@ const TemplateMoviePage: React.FC<TemplateMoviePageProps> = ({movie, children}) 
     );
 };
 
-export default TemplateMoviePage;
+export default TemplateMediaPage;

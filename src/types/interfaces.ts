@@ -40,6 +40,18 @@ export interface BaseMediaProps {
     selectFavourite: (movieId: number) => void;  //added this for movie details page header fav icon
   }
 
+  export interface TVSeriesDetailsProps extends BaseMediaProps {
+    genres: {
+        id: number;
+        name: string;
+    }[];
+    production_countries: {
+        iso_3166_1?: string;
+        name: string;
+    };
+    selectFavourite: (tvSeriesId: number) => void;  //added this for tv details page header fav icon
+  }
+
   export interface MovieImage {
     file_path: string;
     aspect_ratio?: number; //some props are optional...

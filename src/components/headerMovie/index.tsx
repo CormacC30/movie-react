@@ -23,13 +23,12 @@ const styles = {
   },
 };
 
-const MovieHeader: React.FC<MovieDetailsProps> = (movie) => {
-
-  let isFavourite: boolean = false;
+const MovieHeader: React.FC<MovieDetailsProps> = (media, type) => {
     
-  const { favourites } = useContext(MediaContext);
-  if (favourites.find((id) => id === movie.id))
-    isFavourite = true;
+  const { favouriteMovies,favouriteTVSeries } = useContext(MediaContext);
+  const isFavourite = type === "movie"
+      ? favouriteMovies.includes(media.id)
+      : favouriteTVSeries.includes(media.id);
 
   return (
     <Paper component="div" sx={styles.root}>
@@ -46,12 +45,12 @@ const MovieHeader: React.FC<MovieDetailsProps> = (movie) => {
       </Typography> 
 
       <Typography variant="h4" component="h3">
-        {movie.title}{"   "}
-        <a href={movie.homepage}>
+        {media.title || media.name}{"   "}
+        <a href={media.homepage}>
           <HomeIcon color="primary"  fontSize="large"/>
         </a>
         <br />
-        <span>{`${movie.tagline}`} </span>
+        <span>{`${media.tagline}`} </span>
       </Typography>
       <IconButton aria-label="go forward">
         <ArrowForwardIcon color="primary" fontSize="large" />

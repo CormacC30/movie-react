@@ -5,7 +5,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonetizationIcon from "@mui/icons-material/MonetizationOn";
 import StarRate from "@mui/icons-material/StarRate";
 import Typography from "@mui/material/Typography";
-import { MovieDetailsProps } from "../../types/interfaces";
+import { MovieDetailsProps, TVSeriesDetailsProps } from "../../types/interfaces";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
@@ -31,9 +31,13 @@ const styles = {
     },
 };
 
-const MovieDetails: React.FC<MovieDetailsProps> = (movie) => {
+interface MediaDetailsProps {
+    media: MovieDetailsProps | TVSeriesDetailsProps;
+  }
 
-    const [drawerOpen, setDrawerOpen] = useState(false); // New
+const MediaDetails: React.FC<MediaDetailsProps> = ({media}) => {
+
+    const [drawerOpen, setDrawerOpen] = useState(false); 
 
     return (
         <>
@@ -42,30 +46,30 @@ const MovieDetails: React.FC<MovieDetailsProps> = (movie) => {
             </Typography>
 
             <Typography variant="h6" component="p">
-                {movie.overview}
+                {media.overview}
             </Typography>
 
             <Paper component="ul" sx={styles.chipSet}>
                 <li>
                     <Chip label="Genres" sx={styles.chipLabel} color="primary" />
                 </li>
-                {movie.genres.map((g) => (
+                {media.genres.map((g) => (
                     <li key={g.name}>
                         <Chip label={g.name} />
                     </li>
                 ))}
             </Paper>
             <Paper component="ul" sx={styles.chipSet}>
-                <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
+                <Chip icon={<AccessTimeIcon />} label={`${media.runtime} min.`} />
                 <Chip
                     icon={<MonetizationIcon />}
-                    label={`${movie.revenue.toLocaleString()}`}
+                    label={`${media.revenue?.toLocaleString()}`}
                 />
                 <Chip
                     icon={<StarRate />}
-                    label={`${movie.vote_average} (${movie.vote_count}`}
+                    label={`${media.vote_average} (${media.vote_count}`}
                 />
-                <Chip label={`Released: ${movie.release_date}`} />
+                <Chip label={`Released: ${media.release_date || media.first_air_date}`} />
             </Paper>
             <Fab
                 color="secondary"
@@ -77,9 +81,9 @@ const MovieDetails: React.FC<MovieDetailsProps> = (movie) => {
                 Reviews
             </Fab>
             <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-                <MovieReviews {...movie} />
+                <MovieReviews {...media} />
             </Drawer>
         </>
     );
 };
-export default MovieDetails;
+export default MediaDetails;

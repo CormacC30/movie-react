@@ -88,7 +88,7 @@ const MediaCard: React.FC<MediaCardProps> = ({ media, action }) => {
       </CardContent>
       <CardActions disableSpacing>
         {action(media)}
-        <Link to={`/media/${media.id}`}> {/* Adjust the link path if necessary */}
+        <Link to={`/${media.title ? "movie" : "tv"}/${media.id}`}> {/* Adjust the link path if necessary */}
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
           </Button>
