@@ -10,6 +10,7 @@ import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from '../movieReviews'
+import SimilarMovies from "../similarMovies";
 
 const styles = {
     chipSet: {
@@ -33,9 +34,11 @@ const styles = {
 
 interface MediaDetailsProps {
     media: MovieDetailsProps | TVSeriesDetailsProps;
+    id: number;
+    type: 'movie' | 'tv';
   }
 
-const MediaDetails: React.FC<MediaDetailsProps> = ({media}) => {
+const MediaDetails: React.FC<MediaDetailsProps> = ({media, id, type}) => {
 
     const [drawerOpen, setDrawerOpen] = useState(false); 
 
@@ -83,6 +86,11 @@ const MediaDetails: React.FC<MediaDetailsProps> = ({media}) => {
             <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
                 <MovieReviews {...media} />
             </Drawer>
+
+            <Typography variant="h5" component="h3" style={{ marginTop: "20px"}}>
+                Similar {type === "movie" ? "Movies": "TV Shows"}
+            </Typography>
+            <SimilarMovies id={id} type={type} />
         </>
     );
 };

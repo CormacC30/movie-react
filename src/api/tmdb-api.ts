@@ -143,3 +143,32 @@ export const getMovie = (id: string) => {
       throw error
    });
   }
+
+  // similar movies
+  export const getSimilarMovies = (id: string) => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+    ).then((response) => {
+      if (!response.ok)
+        throw new Error(`Unable to fetch similar movies. Response status: ${response.status}`);
+      return response.json();
+    })
+    .then((data) => data.results)
+    .catch((error) => {
+      throw error
+    });
+  }
+// similar tv shows
+  export const getSimilarTVShows = (id: string) => {
+    return fetch(
+      `https://api.themoviedb.org/3/tv/${id}/similar?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+    ).then((response) => {
+      if (!response.ok)
+        throw new Error(`Unable to fetch similar movies. Response status: ${response.status}`);
+      return response.json();
+    })
+    .then((data) => data.results)
+    .catch((error) => {
+      throw error
+    });
+  }

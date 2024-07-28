@@ -51,14 +51,19 @@ const TemplateMediaPage: React.FC<TemplateMediaPageProps> = ({media, type, child
         <MovieHeader {...media} />
 
         <Grid container spacing={5} style={{ padding: "15px" }}>
-            <Grid item xs={3}>
+
+            <Grid item xs={9}>
+                    {children}
+                </Grid>
+                            <Grid item xs={3}>
                 <div>
                     <ImageList cols={1}>
                         {images.map((image: MovieImage) => (
                             <ImageListItem
                                 key={image.file_path}
                                 sx={styles.gridListTitle}
-                                cols={1}
+                                cols={0}
+                                rows={1}
                                 >
                                     <img 
                                       src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
@@ -69,9 +74,6 @@ const TemplateMediaPage: React.FC<TemplateMediaPageProps> = ({media, type, child
                     </ImageList>
                 </div>
             </Grid>
-            <Grid item xs={9}>
-                    {children}
-                </Grid>
         </Grid>
        
         </>
