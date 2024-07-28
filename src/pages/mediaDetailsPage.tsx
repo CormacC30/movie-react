@@ -35,9 +35,6 @@ const MediaDetailsPage: React.FC = () => {
           <PageTemplate media={media} type={type}>
             <MovieDetails media={media} id={id} type={type} />
           </PageTemplate>
-          <Typography variant="h5" component="h3" style={{ marginTop: "20px" }}>
-            Similar {type === "movie" ? "Movies" : "TV Shows"}
-          </Typography>
         </>
       ) : (
         <p>Waiting for details</p>

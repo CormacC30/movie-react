@@ -87,7 +87,7 @@ const MediaDetails: React.FC<MediaDetailsProps> = ({media, id, type}) => {
                 <MovieReviews {...media} />
             </Drawer>
 
-            <Typography variant="h5" component="h3" style={{ marginTop: "20px"}}>
+            <Typography variant="h3" component="h4" align="center" style={{ marginTop: "20px"}}>
                 Similar {type === "movie" ? "Movies": "TV Shows"}
             </Typography>
             <SimilarMovies id={id} type={type} />
