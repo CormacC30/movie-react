@@ -16,7 +16,7 @@ interface SimilarMediaProps {
 const SimilarMovies: React.FC<SimilarMediaProps> = ({id, type}) => {
 
 const {data, error, isLoading, isError} =useQuery<BaseMediaProps[], Error>(
-    [type, id, 'similar'],
+    [type, id, 'similar'], // query key
     () => (type === 'movie' ? getSimilarMovies(id) : getSimilarTVShows(id))
     
 );

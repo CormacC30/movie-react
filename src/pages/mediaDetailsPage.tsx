@@ -16,7 +16,7 @@ const MediaDetailsPage: React.FC = () => {
     isLoading,
     isError,
   } = useQuery<MovieDetailsProps | TVSeriesDetailsProps, Error>(
-    [type, id],
+    [type, id], // query key
     () => (type === "movie" ? getMovie(id || "") : getTVShow(id || ""))
   );
 

@@ -84,6 +84,7 @@ export interface BaseMediaProps {
       id: string;
       name: string
     }[];
+    type: "movie" | "tv";
   }
 
   export interface DiscoverMedia {

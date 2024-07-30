@@ -10,7 +10,7 @@ import SortIcon from "@mui/icons-material/Sort";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { FilterOption, GenreData } from "../../types/interfaces";
-import { getGenres } from "../../api/tmdb-api";
+import { getMovieGenres, getTVGenres } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
 
@@ -31,11 +31,18 @@ interface FilterMoviesCardProps {
   onUserInput: (f: FilterOption, s: string)  => void; // Add this line
   titleFilter: string;
   genreFilter: string;
+  type: "movie" | "tv";
 }
 
-const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, onUserInput }) => {
-  const { data, error, isLoading, isError } = useQuery<GenreData, Error>("genres", getGenres);
 
+const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ type, titleFilter, genreFilter, onUserInput }) => {
+    
+  const { data, error, isLoading, isError } = useQuery<GenreData, Error>( 
+    [type, "genres"], //query key
+    () => (type === "movie" ? getMovieGenres() : getTVGenres()) 
+  )
+  console.log("Type: " + type )
+  
   if (isLoading) {
     return <Spinner />;
   }
@@ -66,10 +73,10 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreF
         <CardContent>
           <Typography variant="h5" component="h1">
             <FilterAltIcon fontSize="large" />
-            Filter the movies.
+            Filter the {type === "movie" ? "Movies": "TV Shows"}.
           </Typography>
           <TextField
-            sx={styles.formControl}
+            sx={styles.formControl} 
             id="filled-search"
             label="Search field"
             type="search"
@@ -100,7 +107,7 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreF
         <CardContent>
           <Typography variant="h5" component="h1">
             <SortIcon fontSize="large" />
-            Sort the movies.
+            Sort the {type === "movie" ? "Movies": "TV Shows"}.
           </Typography>
         </CardContent>
       </Card>
