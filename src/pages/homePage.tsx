@@ -59,11 +59,6 @@ if (movieIsError) {
   const movies = movieData ? movieData.results : [];
   const tvSeries = tvSeriesData ? tvSeriesData.results : [];
   const displayedMedia = tabIndex === 0 ? filterFunction(movies) : filterFunction(tvSeries);
-  
-  // console.log("Movies:", movies);
-  // console.log("TV Series:", tvSeries);
-  // movies.forEach(movie => console.log("Movie genres:", movie.genre_ids));
-  // tvSeries.forEach(tv => console.log("TV genres:", tv.genre_ids));
 
   return (
     <>

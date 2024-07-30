@@ -65,6 +65,7 @@ const TopRatedPage: React.FC = () => {
         action={(media: BaseMediaProps) => <AddToFavouritesIcon {...media} />}
       />
       <MovieFilterUI
+        type={tabIndex ===0 ? "movie" : "tv"}
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
