@@ -5,7 +5,10 @@ import { useQueries } from "react-query";
 import { getMovie, getTVShow } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
-import MovieFilterUI, { titleFilter, genreFilter } from "../components/movieFilterUI";
+import MovieFilterUI, {
+  titleFilter,
+  genreFilter,
+} from "../components/movieFilterUI";
 import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
 import Tabs from "@mui/material/Tabs";
@@ -27,61 +30,69 @@ const genreFiltering = {
 const transformData = (media: any): BaseMediaProps => {
   return {
     ...media,
-    genre_ids: media.genres ? media.genres.map((genre: any) => genre.id) : media.genre_ids,
+    genre_ids: media.genres
+      ? media.genres.map((genre: any) => genre.id)
+      : media.genre_ids,
   };
 };
 
 const FavouriteMoviesPage: React.FC = () => {
   const { favouriteMovies, favouriteTVSeries } = useContext(MediaContext);
   const [tabIndex, setTabIndex] = useState(0);
-  const { filterValues, setFilterValues, filterFunction } = useFiltering([titleFiltering, genreFiltering]);
+  const { filterValues, setFilterValues, filterFunction } = useFiltering([
+    titleFiltering,
+    genreFiltering,
+  ]);
 
   const favouriteMovieQueries = useQueries(
     favouriteMovies.map((movieId) => ({
       queryKey: ["movie", movieId],
-      queryFn: async() => transformData(await getMovie(movieId.toString()))
+      queryFn: async () => transformData(await getMovie(movieId.toString())),
     }))
   );
 
   const favouriteTVSeriesQueries = useQueries(
     favouriteTVSeries.map((tvId) => ({
       queryKey: ["tv", tvId],
-      queryFn: async () => transformData(await getTVShow(tvId.toString()))
+      queryFn: async () => transformData(await getTVShow(tvId.toString())),
     }))
   );
 
-  const isLoading = tabIndex === 0
-    ? favouriteMovieQueries.find((m) => m.isLoading === true)
-    : favouriteTVSeriesQueries.find((m) => m.isLoading === true);
+  const isLoading =
+    tabIndex === 0
+      ? favouriteMovieQueries.find((m) => m.isLoading === true)
+      : favouriteTVSeriesQueries.find((m) => m.isLoading === true);
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  const allFavouriteMovies = favouriteMovieQueries.map((q) => q.data).filter(Boolean); // Filter out undefined values
-  const allFavouriteTVSeries = favouriteTVSeriesQueries.map((q) => q.data).filter(Boolean); // Filter out undefined values
-  
-    // Debugging: Ensure genre_ids are present in media data
-    console.log("All Favourite Movies:", allFavouriteMovies);
-    console.log("All Favourite TV Series:", allFavouriteTVSeries);
-    allFavouriteMovies.forEach(movie => console.log("Movie genres:", movie.genre_ids));
-    allFavouriteTVSeries.forEach(tv => console.log("TV genres:", tv.genre_ids));
-  
-  
-  const displayedMedia = tabIndex === 0
-    ? filterFunction(allFavouriteMovies)
-    : filterFunction(allFavouriteTVSeries);
+  const allFavouriteMovies = favouriteMovieQueries
+    .map((q) => q.data)
+    .filter(Boolean); // Filter out undefined values
+  const allFavouriteTVSeries = favouriteTVSeriesQueries
+    .map((q) => q.data)
+    .filter(Boolean); // Filter out undefined values
+
+  const displayedMedia =
+    tabIndex === 0
+      ? filterFunction(allFavouriteMovies)
+      : filterFunction(allFavouriteTVSeries);
   const changeFilterValues = (type: string, value: string) => {
     const changedFilter = { name: type, value: value };
-    const updatedFilterSet = type === "title"
-      ? [changedFilter, filterValues[1]]
-      : [filterValues[0], changedFilter];
+    const updatedFilterSet =
+      type === "title"
+        ? [changedFilter, filterValues[1]]
+        : [filterValues[0], changedFilter];
     setFilterValues(updatedFilterSet);
   };
 
   return (
     <>
-      <Tabs value={tabIndex} onChange={(event, newValue) => setTabIndex(newValue)}>
+      <Tabs
+        value={tabIndex}
+        onChange={(event, newValue) => setTabIndex(newValue)}
+      >
         <Tab label="Favourite Movies" />
         <Tab label="Favourite TV Series" />
       </Tabs>
@@ -96,6 +107,7 @@ const FavouriteMoviesPage: React.FC = () => {
         )}
       />
       <MovieFilterUI
+        type={tabIndex === 0 ? "movie" : "tv"}
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
