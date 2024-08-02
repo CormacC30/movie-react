@@ -1,18 +1,30 @@
 import React from "react";
 import PageTemplate from "../components/templateMediaPage";
 import ReviewForm from "../components/reviewForm";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import { getMovie } from "../api/tmdb-api";
+import { getMovie, getTVShow } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
-import { BaseMovieProps, MovieDetailsProps } from "../types/interfaces";
+import { BaseMediaProps, MovieDetailsProps } from "../types/interfaces";
+
+interface RouteParams {
+    type: string;
+    id: string;
+  }
 
 const WriteReviewPage: React.FC = () => {
-    const location = useLocation()
-    const { movieId } = location.state;
-    const { data: movie, error, isLoading, isError } = useQuery<MovieDetailsProps, Error>(
-        ["movie", movieId],
-        () => getMovie(movieId)
+    //const location = useLocation();
+    const {type, id}= useParams<RouteParams>();
+ 
+   // const { id } = location.state;
+
+  // Debug log to inspect parameters
+  console.log("Type:", type);
+  console.log("ID:", id);
+
+    const { data: media, error, isLoading, isError } = useQuery<BaseMediaProps, Error>(
+        [type, id],
+        () => (type === "movie" ? getMovie(id || "") : getTVShow(id || ""))
     );
 
     if (isLoading) {
@@ -24,12 +36,12 @@ const WriteReviewPage: React.FC = () => {
     }
     return (
         <>
-            {movie ? (
-                    <PageTemplate movie={movie}>
-                        <ReviewForm {...movie} />
+            {media ? (
+                    <PageTemplate media={media} type={type}>
+                        <ReviewForm {...media} />
                     </PageTemplate>
             ) : (
-                <p>Waiting for movie review details</p>
+                <p>Waiting for {type} review details</p>
             )}
         </>
     );

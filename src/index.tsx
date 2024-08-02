@@ -31,14 +31,14 @@ const App = () => {
         <MediaContextProvider>
           <Routes>
             <Route path="/toprated" element={<TopRatedMoviesPage />} />
-            <Route path="/reviews/form" element={<AddMovieReviewPage />} />
+            <Route path="/review/:type/:id" element={<AddMovieReviewPage />} /> { /* adding the type as a parameter in the url, type prop needed to discern movie vs tv  */}
             <Route path="/reviews/:id" element={<MovieReviewPage />} />
             <Route
               path="/favourites"
               element={<FavouriteMediaPage />}
             />
             <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-            <Route path="/:type/:id" element={<MediaPage />} /> {/* Parameterised the movie and the id */}
+            <Route path="/details/:type/:id" element={<MediaPage />} /> {/* Parameterised the movie and the id */}
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

@@ -95,9 +95,11 @@ export interface BaseMediaProps {
   }
 
   export interface Review {
-    author: string,
-    content: string,
-    agree: boolean,
-    rating: number,
-    movieId: number,
+    author: string;
+    content: string;
+    agree: boolean;
+    rating: number;
+    movieId: number;
+    type: string;
+    id: string;
   }

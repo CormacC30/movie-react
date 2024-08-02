@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { MediaContext } from "../contexts/mediaContext";
-import { useQueries } from "react-query";
+import { useQueries, useQuery } from "react-query";
 import { getMovie, getTVShow } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
@@ -44,6 +44,7 @@ const FavouriteMoviesPage: React.FC = () => {
     genreFiltering,
   ]);
 
+  // use the api query for movies
   const favouriteMovieQueries = useQueries(
     favouriteMovies.map((movieId) => ({
       queryKey: ["movie", movieId],
@@ -51,6 +52,7 @@ const FavouriteMoviesPage: React.FC = () => {
     }))
   );
 
+  // use the api query for tv
   const favouriteTVSeriesQueries = useQueries(
     favouriteTVSeries.map((tvId) => ({
       queryKey: ["tv", tvId],
@@ -102,7 +104,9 @@ const FavouriteMoviesPage: React.FC = () => {
         action={(media) => (
           <>
             <RemoveFromFavourites {...media} />
-            <WriteReview {...media} />
+            <WriteReview 
+            {...media} 
+            />
           </>
         )}
       />
