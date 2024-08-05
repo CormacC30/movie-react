@@ -26,7 +26,7 @@ const styles = {
 
 interface TemplateMediaPageProps {
   media: MovieDetailsProps | TVSeriesDetailsProps;
-  type: "movie" | "tv";
+  type: "movie" | "tv" | undefined;
   children: React.ReactElement;
 }
 

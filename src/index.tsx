@@ -32,7 +32,7 @@ const App = () => {
           <Routes>
             <Route path="/toprated" element={<TopRatedMoviesPage />} />
             <Route path="/review/:type/:id" element={<AddMovieReviewPage />} /> { /* adding the type as a parameter in the url, type prop needed to discern movie vs tv  */}
-            <Route path="/reviews/:type/:id" element={<MovieReviewPage />} /> { /* adding the type as a parameter in the url, type prop needed to discern movie vs tv  */}
+            <Route path="/reviews/:id" element={<MovieReviewPage />} /> { /* adding the type as a parameter in the url, type prop needed to discern movie vs tv  */}
             <Route
               path="/favourites"
               element={<FavouriteMediaPage />}

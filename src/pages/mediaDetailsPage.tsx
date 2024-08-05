@@ -10,7 +10,7 @@ import { MovieDetailsProps, TVSeriesDetailsProps } from "../types/interfaces";
 
 const MediaDetailsPage: React.FC = () => {
   const { id, type } = useParams<{ id: string; type: string }>();
-  const {
+  const { 
     data: media,
     error,
     isLoading,

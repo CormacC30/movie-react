@@ -41,7 +41,7 @@ interface MediaDetailsProps {
 const MediaDetails: React.FC<MediaDetailsProps> = ({media, id, type}) => {
 
     const [drawerOpen, setDrawerOpen] = useState(false); 
-
+    console.log("mEdIa ", media);
     return (
         <>
             <Typography variant="h5" component="h3">
@@ -84,7 +84,7 @@ const MediaDetails: React.FC<MediaDetailsProps> = ({media, id, type}) => {
                 Reviews
             </Fab>
             <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-                <MovieReviews {...media} id={id} type={type}/>
+                <MovieReviews media={media} id={id} type={type}/>
             </Drawer>
 
             <Typography variant="h3" component="h4" align="center" style={{ marginTop: "20px"}}>

@@ -34,7 +34,7 @@ const MovieReviews: React.FC<MovieReviewsProps> = ({media, id, type}) => {
         () => getReviews(id)
     )
     console.log("reviews: ", reviews);
-
+    console.log("MEDIA: ", {media});
     if (isLoading) {
         return <Spinner />
     }
