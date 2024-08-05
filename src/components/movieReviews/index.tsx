@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,10 +8,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
-import { getMovieReviews } from "../../api/tmdb-api"; // need to do the same for TV
+import { getMovieReviews, getTVReviews } from "../../api/tmdb-api"; // need to do the same for TV
 import { excerpt } from "../../util";
-
-import { MovieDetailsProps, Review } from "../../types/interfaces";
+import Spinner from "../spinner"
+import { MovieDetailsProps, TVSeriesDetailsProps, Review } from "../../types/interfaces";
 
 const styles = {
     table: {
@@ -18,15 +19,29 @@ const styles = {
     },
 };
 
-const MovieReviews: React.FC<MovieDetailsProps> = (movie) => { 
-    const [reviews, setReviews] = useState([]);
+interface MovieReviewsProps {
+    media: MovieDetailsProps | TVSeriesDetailsProps;
+    type: "movie" | "tv";
+    id: string;
+  }
 
-    useEffect(() => {
-        getMovieReviews(movie.id).then((reviews) => {
-            setReviews(reviews);
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+const MovieReviews: React.FC<MovieReviewsProps> = ({media, id, type}) => { 
+    const getReviews = type === "movie" ? getMovieReviews : getTVReviews
+   //  const [reviews, setReviews] = useState([]);
+   
+    const { data: reviews, error, isLoading, isError } = useQuery<Review[], Error>(
+        [type, id, "reviews"],
+        () => getReviews(id)
+    )
+    console.log("reviews: ", reviews);
+
+    if (isLoading) {
+        return <Spinner />
+    }
+
+    if (isError) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
         <TableContainer component={Paper}>
@@ -50,7 +65,7 @@ const MovieReviews: React.FC<MovieDetailsProps> = (movie) => {
                                     to={`/reviews/${r.id}`}
                                     state={{
                                         review: r,
-                                        movie: movie,
+                                        media: media,
                                     }}
                                 >
                                     Full Review

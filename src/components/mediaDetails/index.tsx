@@ -34,7 +34,7 @@ const styles = {
 
 interface MediaDetailsProps {
     media: MovieDetailsProps | TVSeriesDetailsProps;
-    id: number;
+    id: number | string;
     type: 'movie' | 'tv';
   }
 
@@ -84,7 +84,7 @@ const MediaDetails: React.FC<MediaDetailsProps> = ({media, id, type}) => {
                 Reviews
             </Fab>
             <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-                <MovieReviews {...media} />
+                <MovieReviews {...media} id={id} type={type}/>
             </Drawer>
 
             <Typography variant="h3" component="h4" align="center" style={{ marginTop: "20px"}}>

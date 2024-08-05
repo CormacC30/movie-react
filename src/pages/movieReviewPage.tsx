@@ -8,7 +8,7 @@ import {Review} from "../types/interfaces";
 const MovieReviewPage: React.FC = () => {
 
   const { state : {media, review } } = useLocation(); //new, fix later
-
+  const { id, type } = useParams<{ id: string; type: string }>();
   return (
     <PageTemplate media={media} type={type}> { /* fix later */ }
       <MovieReview {...review} />
