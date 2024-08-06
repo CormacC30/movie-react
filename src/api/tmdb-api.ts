@@ -206,7 +206,34 @@ export const getMovie = (id: string) => {
         throw new Error(`Unable to fetch on the air TV shows. Response status: ${response.status}`);
       return response.json();
     })
-    //.then((data) => data.results)
+    .catch((error) => {
+      throw error
+    });
+  }
+
+  // movie credits
+  export const getMovieCredits = (id: string) => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
+    ).then((response) => {
+      if (!response.ok)
+        throw new Error(`Unable to retrieve the movie credits. Response status:  ${response.status}`);
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+    });
+  }
+
+  // TV credits
+  export const getTVCredits = (id: string) => {
+    return fetch(
+      `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
+    ).then((response) => {
+      if (!response.ok)
+        throw new Error(`Unable to retrieve the movie credits. Response status:  ${response.status}`);
+      return response.json();
+    })
     .catch((error) => {
       throw error
     });

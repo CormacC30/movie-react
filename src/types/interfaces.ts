@@ -103,3 +103,38 @@ export interface BaseMediaProps {
     type: string;
     id: string;
   }
+
+  export interface CastProps{
+    adult: boolean;
+    gender: number;
+    id: string;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string | null;
+    character: string;
+    credit_id: string;
+    order: number;
+  }
+
+  export interface CrewProps{
+    adult: boolean;
+    gender: number;
+    id: string;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string | null;
+    credit_id: string;
+    department: string;
+    job: string;
+  }
+
+  export interface CreditsProps {
+    cast: CastProps[];
+    crew: CrewProps[];
+    id: string;
+    type: "movie" | "tv";
+  }

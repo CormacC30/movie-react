@@ -11,6 +11,7 @@ import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from '../movieReviews'
 import SimilarMovies from "../similarMovies";
+import MediaCredits from "../mediaCredits";
 
 const styles = {
     chipSet: {
@@ -86,6 +87,11 @@ const MediaDetails: React.FC<MediaDetailsProps> = ({media, id, type}) => {
             <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
                 <MovieReviews media={media} id={id} type={type}/>
             </Drawer>
+
+            <Typography variant="h3" component="h4" align="center" style={{ marginTop: "20px"}}>
+                Credits
+            </Typography>
+                <MediaCredits id={id} type={type}/>
 
             <Typography variant="h3" component="h4" align="center" style={{ marginTop: "20px"}}>
                 Similar {type === "movie" ? "Movies": "TV Shows"}
