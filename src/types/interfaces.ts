@@ -114,8 +114,10 @@ export interface BaseMediaProps {
     popularity: number;
     profile_path: string | null;
     character: string;
+    cast_id: string;
     credit_id: string;
     order: number;
+    known_for?: BaseMediaProps[];
   }
 
   export interface CrewProps{
