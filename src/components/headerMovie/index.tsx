@@ -5,13 +5,13 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import HomeIcon from "@mui/icons-material/Home";
-import { MovieDetailsProps } from "../../types/interfaces"; 
+import { MovieDetailsProps } from "../../types/interfaces";
 import { Avatar } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { MediaContext } from "../../contexts/mediaContext";
 
 const styles = {
-    root: {  
+  root: {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
@@ -24,9 +24,9 @@ const styles = {
 };
 
 const MovieHeader: React.FC<MovieDetailsProps> = (media, type) => {
-    
-  const { favouriteMovies,favouriteTVSeries } = useContext(MediaContext);
-  const isFavourite = type === "movie"
+  const { favouriteMovies, favouriteTVSeries } = useContext(MediaContext);
+  const isFavourite =
+    type === "movie"
       ? favouriteMovies.includes(media.id)
       : favouriteTVSeries.includes(media.id);
 
@@ -37,17 +37,18 @@ const MovieHeader: React.FC<MovieDetailsProps> = (media, type) => {
       </IconButton>
 
       <Typography variant="h5" component="p">
-      {isFavourite === true && (
-                  <Avatar sx={styles.avatar}>
-                    <FavoriteIcon />
-                  </Avatar>
-      )}
-      </Typography> 
+        {isFavourite === true && (
+          <Avatar sx={styles.avatar}>
+            <FavoriteIcon />
+          </Avatar>
+        )}
+      </Typography>
 
       <Typography variant="h4" component="h3">
-        {media.title || media.name}{"   "}
+        {media.title || media.name}
+        {"   "}
         <a href={media.homepage}>
-          <HomeIcon color="primary"  fontSize="large"/>
+          <HomeIcon color="primary" fontSize="large" />
         </a>
         <br />
         <span>{`${media.tagline}`} </span>

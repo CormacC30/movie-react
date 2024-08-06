@@ -12,6 +12,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import MediaContextProvider from "./contexts/mediaContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import TopRatedMoviesPage from "./pages/topRatedPage";
+import OnTheAirTVPage from "./pages/onTheAirPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,8 +28,8 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <SiteHeader />
         <MediaContextProvider>
+        <SiteHeader />
           <Routes>
             <Route path="/toprated" element={<TopRatedMoviesPage />} />
             <Route path="/review/:type/:id" element={<AddMovieReviewPage />} /> { /* adding the type as a parameter in the url, type prop needed to discern movie vs tv  */}
@@ -40,7 +41,9 @@ const App = () => {
             <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
             <Route path="/details/:type/:id" element={<MediaPage />} /> {/* Parameterised the movie and the id */}
             <Route path="/" element={<HomePage />} />
+            <Route path="/tv/on-the-air" element={<OnTheAirTVPage />} />
             <Route path="*" element={<Navigate to="/" />} />
+
           </Routes>
         </MediaContextProvider>
       </BrowserRouter>

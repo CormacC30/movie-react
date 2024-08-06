@@ -196,3 +196,18 @@ export const getMovie = (id: string) => {
       throw error
     });
   }
+
+  // on the air
+  export const getOnTheAirTV = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/tv/on_the_air?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+    ).then((response) => {
+      if (!response.ok)
+        throw new Error(`Unable to fetch on the air TV shows. Response status: ${response.status}`);
+      return response.json();
+    })
+    //.then((data) => data.results)
+    .catch((error) => {
+      throw error
+    });
+  }

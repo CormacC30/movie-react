@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState, MouseEvent, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,6 +11,8 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useMedia } from "../../contexts/mediaContext";
+import { MediaContext } from "../../contexts/mediaContext";
 
 const styles = {
     title: {
@@ -20,19 +22,27 @@ const styles = {
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
-const SiteHeader: React.FC = () => {
+const SiteHeader: React.FC<SiteHeaderProps> = () => {
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement|null>(null);
     const open = Boolean(anchorEl);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+    const {tabIndex} = useContext(MediaContext);
 
     const menuOptions = [
         { label: "Home", path: "/" },
         { label: "Favorites", path: "/favourites" },
         { label: "Top Rated", path: "/toprated" },
-        { label: "Upcoming Movies", path: "/movies/upcoming" },
+      //  { label: "Upcoming Movies", path: "/movies/upcoming" },
+      //  { label: "On The Air", path: "/tv/on-the-air"},
       ];
+    const lastOption = tabIndex === 0  //conditional rendering the last menu optoin
+    ? { label: "Upcoming Movies", path: "/movies/upcoming" }
+    : { label: "On The Air", path: "/tv/on-the-air"};
+    
+    console.log("tab index ", tabIndex);
+    console.log("lastOption ", lastOption);
 
     const handleMenuSelect = (pageURL: string) => {
         navigate(pageURL);
@@ -87,6 +97,12 @@ const SiteHeader: React.FC = () => {
                         {opt.label}
                       </MenuItem>
                     ))}
+                      <MenuItem
+                        key={lastOption.label}
+                        onClick={() => lastOption.path}
+                      >
+                        {lastOption.label}
+                      </MenuItem>
                   </Menu>
                 </>
               ) : (
@@ -100,6 +116,13 @@ const SiteHeader: React.FC = () => {
                       {opt.label}
                     </Button>
                   ))}
+                    <Button
+                      key={lastOption.label}
+                      color="inherit"
+                      onClick={() => handleMenuSelect(lastOption.path)}
+                    >
+                      {lastOption.label}
+                    </Button>
                 </>
               )}
             </Toolbar>

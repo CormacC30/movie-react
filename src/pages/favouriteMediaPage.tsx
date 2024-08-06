@@ -37,8 +37,9 @@ const transformData = (media: any): BaseMediaProps => {
 };
 
 const FavouriteMoviesPage: React.FC = () => {
+  const { tabIndex, setTabIndex } = useContext(MediaContext);
   const { favouriteMovies, favouriteTVSeries } = useContext(MediaContext);
-  const [tabIndex, setTabIndex] = useState(0);
+  // const [tabIndex, setTabIndex] = useState(0);
   const { filterValues, setFilterValues, filterFunction } = useFiltering([
     titleFiltering,
     genreFiltering,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { DiscoverMedia, BaseMediaProps } from "../types/interfaces";
 import { getTopRatedMovies, getTopRatedTVSeries } from "../api/tmdb-api";
@@ -9,6 +9,7 @@ import MovieFilterUI, { titleFilter, genreFilter } from "../components/movieFilt
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { MediaContext } from "../contexts/mediaContext";
 
 const titleFiltering = {
   name: "title",
@@ -22,7 +23,8 @@ const genreFiltering = {
 };
 
 const TopRatedPage: React.FC = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const { tabIndex, setTabIndex } = useContext(MediaContext);
+  // const [tabIndex, setTabIndex] = useState(0);
   const { filterValues, setFilterValues, filterFunction } = useFiltering([titleFiltering, genreFiltering]);
 
   const { data: movieData, error: movieError, isLoading: movieLoading, isError: movieIsError } = useQuery<DiscoverMedia, Error>("topRatedMovies", getTopRatedMovies);

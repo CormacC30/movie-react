@@ -9,6 +9,8 @@ interface MediaContextInterface {
   addReview: (media: BaseMediaProps, review: Review) => void;
   mustWatch: number[];
   addToMustWatch: (mediaId: number) => void;
+  tabIndex: number;
+  setTabIndex: (index: number) => void;
 }
 
 const initialContextState: MediaContextInterface = {
@@ -19,6 +21,8 @@ const initialContextState: MediaContextInterface = {
   addReview: () => {},
   mustWatch: [],
   addToMustWatch: () => {},
+  tabIndex: 0,
+  setTabIndex: () => {}
 };
 
 export const MediaContext = React.createContext<MediaContextInterface>(initialContextState);
@@ -28,6 +32,7 @@ const MediaContextProvider: React.FC<React.PropsWithChildren> = ({ children }) =
   const [favouriteMovies, setFavouriteMovies] = useState<number[]>([]);
   const [favouriteTVSeries, setFavouriteTVSeries] = useState<number[]>([]);
   const [mustWatch, setMustWatch] = useState<number[]>([]);
+  const [tabIndex, setTabIndex] = useState<number>(0);
 
   const addReview = (media: BaseMediaProps, review: Review) => {
     setMyReviews((prevReviews) => [...prevReviews, { ...review, mediaId: media.id }]);
@@ -79,6 +84,8 @@ const MediaContextProvider: React.FC<React.PropsWithChildren> = ({ children }) =
         addReview,
         mustWatch,
         addToMustWatch,
+        tabIndex,
+        setTabIndex // added tab index to the context so nav bar can be conditionally rendered
       }}
     >
       {children}

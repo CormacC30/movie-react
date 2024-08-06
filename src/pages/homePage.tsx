@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getMovies, getTVSeries } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
@@ -12,6 +12,7 @@ import Spinner from "../components/spinner";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { MediaContext } from "../contexts/mediaContext";
 
 const titleFiltering = {
   name: "title",
@@ -26,7 +27,7 @@ const genreFiltering = {
 
 const HomePage: React.FC = () => {
   
-  const [tabIndex, setTabIndex] = useState(0);
+  const {tabIndex, setTabIndex} = useContext(MediaContext); // update the media context with tab index
   const [tvSeriesData, setTVSeriesData] = useState<DiscoverMedia | null>(null);
   const { data: movieData, error: movieError, isLoading: movieLoading, isError: movieIsError } = useQuery<DiscoverMedia, Error>("discoverMovies", getMovies);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
