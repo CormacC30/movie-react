@@ -8,6 +8,21 @@ import Grid from "@mui/material/Grid";
 import CastList from "../castList";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+const styles = {
+    boxParams: {
+      maxWidth: "flex",
+      borderRadius: 2,
+      bgcolor: "background.default",
+      display: "grid",
+      gridTemplateColumns: { md: "1fr 1fr" },
+      gap: 2,
+    }
+}
 
 const MediaCredits: React.FC<CreditsProps | CastProps> = ({ id, type }) => {
   const { data, error, isLoading, isError } = useQuery<
@@ -36,35 +51,48 @@ const MediaCredits: React.FC<CreditsProps | CastProps> = ({ id, type }) => {
 
   return (
     <>
-      <Typography variant="h5" component="h3">
-        Cast
-      </Typography>
-      <Grid container >
         <Box
-        sx={{
-          p: 4,
-          borderRadius: 2,
-          bgcolor: 'background.default',
-          display: 'grid',
-          gridTemplateColumns: { md: '1fr 1fr' },
-          gap: 2,
-        }}>
-          <Paper elevation={1}>
-            <CastList cast={cast} />
-          </Paper>
+          sx={
+            styles.boxParams
+          }
+        >
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+            >
+              <Typography variant="h5" component="h3">
+                Cast
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Paper elevation={1}>
+                <CastList cast={cast} />
+              </Paper>
+            </AccordionDetails>
+          </Accordion>
         </Box>
-      </Grid>
-
-      <Typography variant="h5" component="h3">
-        Crew
-      </Typography>
-      <Grid container spacing={2} justifyContent="center">
-        {crew.map((credit) => (
-          <Grid item xs={12} sm={4} md={4} lg={4} key={credit.id}>
-            <Typography variant="body1">{credit.name}</Typography>
-          </Grid>
-        ))}
-      </Grid>
+      <Box
+          sx={styles.boxParams}
+        >
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+            >
+              <Typography variant="h5" component="h3">
+                Crew
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Paper elevation={1}>
+                <CastList cast={crew} />
+              </Paper>
+            </AccordionDetails>
+          </Accordion>
+        </Box>
     </>
   );
 };

@@ -118,6 +118,7 @@ export interface BaseMediaProps {
     credit_id: string;
     order: number;
     known_for?: BaseMediaProps[];
+    job?: string;
   }
 
   export interface CrewProps{

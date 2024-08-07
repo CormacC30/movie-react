@@ -17,7 +17,7 @@ import Avatar from "@mui/material/Avatar";
 import { MediaContext } from "../../contexts/mediaContext";
 
 const styles = {
-  card: { maxWidth: "auto", margin: 'auto' },
+  card: { maxWidth: "auto", margin: "auto" },
   cast: { height: 300 },
   avatar: {
     backgroundColor: "rgb(255, 0, 0)",
@@ -49,6 +49,8 @@ const { favouriteActor } = useContext(MediaContext); // delete unless context wi
 
     */
 
+  const role = cast.known_for_department === "Acting" ? cast.character : cast.job;
+
   const name= cast.name
 
   return (
@@ -75,7 +77,7 @@ const { favouriteActor } = useContext(MediaContext); // delete unless context wi
         <Grid container justifyContent="center" padding={2}>
         <Grid item xs={12}>
           <Typography variant="body1" align="center">
-            {cast.character}
+            {role}
           </Typography>
         </Grid>
       </Grid>

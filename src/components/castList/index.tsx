@@ -13,7 +13,7 @@ interface CastListProps {
       width: '800px',
       maxHeight: '600px', // Adjust height as needed
       overflowY: 'auto',
-      padding: '10px',
+      padding: '20px',
     },
   };
 

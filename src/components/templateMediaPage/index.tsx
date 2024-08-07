@@ -58,13 +58,13 @@ const TemplateMediaPage: React.FC<TemplateMediaPageProps> = ({
       <MovieHeader {...media} />
 
       <Grid container spacing={5} style={{ padding: "15px" }}>
-        <Grid item xs={8}>
+        <Grid item xs={8} maxWidth= "flex">
           {children}
         </Grid>
         <Grid item xs={4}>
           <div>
             <ImageList
-              sx={{ width: 500, height: 750 }}
+              sx={{ width: "flex", height: 750 }}
               variant="masonry"
               cols={1}
               gap={2}
