@@ -7,6 +7,7 @@ import { PageTemplate } from "../templateMovieListPage";
 import Spinner from "../spinner";
 import MediaCard from "../mediaCard";
 import Grid from "@mui/material/Grid";
+import AddToFavouritesIcon from "../cardIcons/addToFavourites";
 
 interface SimilarMediaProps {
   type: 'movie' | 'tv';
@@ -36,7 +37,9 @@ console.log(data);
     <Grid container spacing={2}>
     {data.map((media) => (
         <Grid item xs={12} sm={4} md={4} lg={4} key={media.id}>
-          <MediaCard media={media} action={() => {}} />
+          <MediaCard media={media} action={(media: BaseMediaProps) => {
+          return <AddToFavouritesIcon {...media} />
+        }} />
         </Grid>
       ))}     
     
