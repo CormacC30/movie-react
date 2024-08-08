@@ -64,7 +64,7 @@ console.log("TYYYYPE:", type);
           {children}
         </Grid>
         <Grid item xs={4}>
-          <div>
+
             <ImageList
               sx={{ width: "flex", height: 750 }}
               variant="masonry"
@@ -85,7 +85,7 @@ console.log("TYYYYPE:", type);
                 </ImageListItem>
               ))}
             </ImageList>
-          </div>
+
         </Grid>
       </Grid>
     </>
