@@ -29,6 +29,7 @@ export interface BaseMediaProps {
   }
 
   export interface MovieDetailsProps extends BaseMediaProps {
+    type: "movie";
     genres: {
         id: number;
         name: string;
@@ -41,6 +42,7 @@ export interface BaseMediaProps {
   }
 
   export interface TVSeriesDetailsProps extends BaseMediaProps {
+    type: "tv";
     genres: {
         id: number;
         name: string;

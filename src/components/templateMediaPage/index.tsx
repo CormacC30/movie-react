@@ -11,6 +11,7 @@ import {
 } from "../../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from "../spinner";
+import { useParams } from "react-router-dom";
 
 const styles = {
   gridListRoot: {
@@ -37,6 +38,7 @@ const TemplateMediaPage: React.FC<TemplateMediaPageProps> = ({
 }) => {
   const queryKey =
     type === "movie" ? ["images", media.id] : ["tvImages", media.id]; // pagination
+//  const type = useParams()
   const fetchImages = type === "movie" ? getMovieImages : getTVSeriesImages;
   const { data, error, isLoading, isError } = useQuery<MovieImage[], Error>(
     queryKey,
@@ -52,10 +54,10 @@ const TemplateMediaPage: React.FC<TemplateMediaPageProps> = ({
   }
 
   const images = data as MovieImage[];
-
+console.log("TYYYYPE:", type);
   return (
     <>
-      <MovieHeader {...media} />
+      <MovieHeader {...media}/>
 
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={8} maxWidth= "flex">

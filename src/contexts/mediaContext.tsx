@@ -34,6 +34,9 @@ const MediaContextProvider: React.FC<React.PropsWithChildren> = ({ children }) =
   const [mustWatch, setMustWatch] = useState<number[]>([]);
   const [tabIndex, setTabIndex] = useState<number>(0);
 
+console.log("fav movies", favouriteMovies);
+console.log("fav tv", favouriteTVSeries);
+
   const addReview = (media: BaseMediaProps, review: Review) => {
     setMyReviews((prevReviews) => [...prevReviews, { ...review, mediaId: media.id }]);
   };

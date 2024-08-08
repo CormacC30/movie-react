@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import HomeIcon from "@mui/icons-material/Home";
-import { MovieDetailsProps } from "../../types/interfaces";
+import { MovieDetailsProps, TVSeriesDetailsProps } from "../../types/interfaces";
 import { Avatar } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { MediaContext } from "../../contexts/mediaContext";
@@ -23,12 +23,12 @@ const styles = {
   },
 };
 
-const MovieHeader: React.FC<MovieDetailsProps> = (media, type) => {
+const MovieHeader: React.FC<MovieDetailsProps | TVSeriesDetailsProps> = (media) => {
   const { favouriteMovies, favouriteTVSeries } = useContext(MediaContext);
-  const isFavourite =
-    type === "movie"
-      ? favouriteMovies.includes(media.id)
-      : favouriteTVSeries.includes(media.id);
+  // console.log("Type ", type);
+
+  const isFavourite = favouriteMovies.includes(media.id) || favouriteTVSeries.includes(media.id);
+  console.log("is fav:" ,isFavourite);
 
   return (
     <Paper component="div" sx={styles.root}>
