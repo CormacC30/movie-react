@@ -29,8 +29,6 @@ const MediaCredits: React.FC<CreditsProps | CastProps> = ({ id, type }) => {
     type === "movie" ? getMovieCredits(id) : getTVCredits(id)
   );
 
-  console.log(data);
-
   if (isLoading) {
     return <Spinner />;
   }
@@ -44,8 +42,7 @@ const MediaCredits: React.FC<CreditsProps | CastProps> = ({ id, type }) => {
   }
 
   const { cast, crew } = data;
-  console.log("cast: ", cast);
-
+ 
   return (
     <>
         <Box

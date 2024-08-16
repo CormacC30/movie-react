@@ -21,7 +21,6 @@ const {data, error, isLoading, isError} =useQuery<BaseMediaProps[], Error>(
     () => (type === 'movie' ? getSimilarMovies(id) : getSimilarTVShows(id))
     
 );
-console.log(data);
 
   if (isLoading) {
     return <Spinner />;

@@ -143,3 +143,15 @@ export interface BaseMediaProps {
     id: string;
     type: "movie" | "tv";
   }
+
+  export interface ActorCreditProps {
+    id: string;
+    title?: string;
+    name?: string;
+    original_name?: string;
+    character: string;
+    release_date?: string;
+    first_air_date?: string;
+    media_type: "movie" | "tv";
+    poster_path?: string;
+  }
