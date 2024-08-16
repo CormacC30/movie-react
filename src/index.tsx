@@ -13,6 +13,7 @@ import MediaContextProvider from "./contexts/mediaContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import TopRatedMoviesPage from "./pages/topRatedPage";
 import OnTheAirTVPage from "./pages/onTheAirPage";
+import ActorBiographyPage from "./pages/actorBioPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,8 +43,8 @@ const App = () => {
             <Route path="/details/:type/:id" element={<MediaPage />} /> {/* Parameterised the movie and the id */}
             <Route path="/" element={<HomePage />} />
             <Route path="/tv/on-the-air" element={<OnTheAirTVPage />} />
+            <Route path="/actor/:id" element={<ActorBiographyPage/>} />
             <Route path="*" element={<Navigate to="/" />} />
-
           </Routes>
         </MediaContextProvider>
       </BrowserRouter>

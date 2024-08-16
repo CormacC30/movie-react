@@ -15,6 +15,7 @@ import { CastProps } from "../../types/interfaces";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { MediaContext } from "../../contexts/mediaContext";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   card: { maxWidth: "auto", margin: "auto" },
@@ -22,6 +23,7 @@ const styles = {
   avatar: {
     backgroundColor: "rgb(255, 0, 0)",
   },
+  cursor: "pointer",
   media: {
     display: 'flex',
     justifyContent: 'center',
@@ -51,10 +53,17 @@ const { favouriteActor } = useContext(MediaContext); // delete unless context wi
 
   const role = cast.known_for_department === "Acting" ? cast.character : cast.job;
 
-  const name= cast.name
+  const name= cast.name;
+
+  const navigate = useNavigate();
+  console.log("persons id: ", cast.id);
+
+  const handleClick = () => {
+    navigate(`/actor/${cast.id}`)
+  }
 
   return (
-    <Card sx={styles.card}>
+    <Card sx={styles.card} >
         <CardHeader
           title={
             <Typography variant="h6">
@@ -91,11 +100,14 @@ const { favouriteActor } = useContext(MediaContext); // delete unless context wi
             </Grid>
           </Grid>
         </CardContent>
-        {/* 
         <CardActions disableSpacing>
-        ....button with link to  artist bio in here.
-        </CardActions>
-        */}
+        {/* action(cast) */}
+        <Link to={`/actor/${cast.id}`}> 
+          <Button variant="outlined" size="medium" color="primary">
+            More Info ...
+          </Button>
+        </Link>
+      </CardActions>
     </Card>
   )
 
