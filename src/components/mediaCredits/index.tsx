@@ -15,9 +15,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const styles = {
     boxParams: {
-
+      maxWidth: "100%",
       display: "grid",
-      gridTemplateColumns: { md: "1fr 1fr" },
       gap: 2,
     }
 }

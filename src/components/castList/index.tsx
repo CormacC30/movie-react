@@ -10,7 +10,7 @@ interface CastListProps {
 
   const styles = {
     scrollableBox: {
-      width: '800px',
+      width: "100%",
       maxHeight: '600px', // Adjust height as needed
       overflowY: 'auto',
       padding: '20px',
