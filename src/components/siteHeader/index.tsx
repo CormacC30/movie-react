@@ -13,6 +13,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useMedia } from "../../contexts/mediaContext";
 import { MediaContext } from "../../contexts/mediaContext";
+import {useAuth0} from  "@auth0/auth0-react";
 
 interface SiteHeaderProps {
   tabIndex: number;
@@ -27,6 +28,7 @@ const styles = {
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader: React.FC<SiteHeaderProps> = () => {
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement|null>(null);
     const open = Boolean(anchorEl);
@@ -56,83 +58,104 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
     };
 
     return (
-        <>
-          <AppBar position="fixed" elevation={0} color="primary">
-            <Toolbar>
-              <Typography variant="h4" sx={styles.title}>
-                TMDB Client
-              </Typography>
-              <Typography variant="h6" sx={styles.title}>
-                All you ever wanted to know about Movies!
-              </Typography>
-              {isMobile ? (
-                <>
-                  <IconButton
-                    aria-label="menu"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleMenu}
-                    color="inherit"
-                    size="large"
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    open={open}
-                    onClose={() => setAnchorEl(null)}
-                  >
-                    {menuOptions.map((opt) => (
-                      <MenuItem
-                        key={opt.label}
-                        onClick={() => handleMenuSelect(opt.path)}
-                      >
-                        {opt.label}
-                      </MenuItem>
-                    ))}
-                      <MenuItem
-                        key={lastOption.label}
-                        onClick={() => lastOption.path}
-                      >
-                        {lastOption.label}
-                      </MenuItem>
-                  </Menu>
-                </>
-              ) : (
-                <>
+      <>
+        <AppBar position="fixed" elevation={0} color="primary">
+          <Toolbar>
+            <Typography variant="h4" sx={styles.title}>
+              TMDB Client
+            </Typography>
+            <Typography variant="h6" sx={styles.title}>
+              All you ever wanted to know about Movies!
+            </Typography>
+            {isMobile ? (
+              <>
+                <IconButton
+                  aria-label="menu"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                  size="large"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={open}
+                  onClose={() => setAnchorEl(null)}
+                >
                   {menuOptions.map((opt) => (
-                    <Button
+                    <MenuItem
                       key={opt.label}
-                      color="inherit"
                       onClick={() => handleMenuSelect(opt.path)}
                     >
                       {opt.label}
-                    </Button>
+                    </MenuItem>
                   ))}
-                    <Button
-                      key={lastOption.label}
-                      color="inherit"
-                      onClick={() => handleMenuSelect(lastOption.path)}
-                    >
-                      {lastOption.label}
-                    </Button>
-                </>
-              )}
-            </Toolbar>
-          </AppBar>
-          <Offset />
-        </>
-      );
+                  <MenuItem
+                    key={lastOption.label}
+                    onClick={() => handleMenuSelect(lastOption.path)}
+                  >
+                    {lastOption.label}
+                  </MenuItem>
+                  {isAuthenticated ? (
+                    <MenuItem onClick={() => logout({ returnTo: window.location.origin })}>
+                      Logout
+                    </MenuItem>
+                  ) : (
+                    <MenuItem onClick={() => loginWithRedirect()}>
+                      Login
+                    </MenuItem>
+                  )}
+                </Menu>
+              </>
+            ) : (
+              <>
+                {menuOptions.map((opt) => (
+                  <Button
+                    key={opt.label}
+                    color="inherit"
+                    onClick={() => handleMenuSelect(opt.path)}
+                  >
+                    {opt.label}
+                  </Button>
+                ))}
+                <Button
+                  key={lastOption.label}
+                  color="inherit"
+                  onClick={() => handleMenuSelect(lastOption.path)}
+                >
+                  {lastOption.label}
+                </Button>
+                {isAuthenticated ? (
+                  <Button
+                    variant="contained"
+                    onClick={() => logout({ returnTo: window.location.origin })}
+                  >
+                    Logout
+                  </Button>
+                ) : (
+                  <Button variant="contained" onClick={() => loginWithRedirect()}>
+                    Login
+                  </Button>
+                )}
+              </>
+            )}
+          </Toolbar>
+        </AppBar>
+        <Offset />
+      </>
+    );
 
 };
 

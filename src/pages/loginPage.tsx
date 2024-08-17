@@ -1,38 +1,17 @@
-import React, { useState } from "react";
-import { useAuth } from "../contexts/authContext";
-import { TextField, Button, Stack } from "@mui/material";
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Button } from "@mui/material";
 
 const LoginPage: React.FC = () => {
-  const { authenticate } = useAuth();
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await authenticate(username, password);
-  };
+  const { loginWithRedirect } = useAuth0();
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Stack spacing={2} maxWidth={400} margin="auto" mt={5}>
-        <TextField
-          label="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          fullWidth
-        />
-        <TextField
-          label="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          fullWidth
-        />
-        <Button type="submit" variant="contained" color="primary" fullWidth>
-          Login
-        </Button>
-      </Stack>
-    </form>
+    <div style={{ textAlign: "center", marginTop: "20vh" }}>
+      <h1>Login</h1>
+      <Button variant="contained" color="primary" onClick={() => loginWithRedirect()}>
+        Log in with Auth0
+      </Button>
+    </div>
   );
 };
 
