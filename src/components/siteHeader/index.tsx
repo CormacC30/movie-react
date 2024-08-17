@@ -14,6 +14,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useMedia } from "../../contexts/mediaContext";
 import { MediaContext } from "../../contexts/mediaContext";
 
+interface SiteHeaderProps {
+  tabIndex: number;
+}
+
 const styles = {
     title: {
       flexGrow: 1,
