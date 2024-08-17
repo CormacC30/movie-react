@@ -282,3 +282,18 @@ export const getMovie = (id: string) => {
       throw error
     });
   }
+
+  // search person
+
+  export const getPerson = (query: string) => {
+    return fetch(
+      `https://api.themoviedb.org/3/search/person?query=${query}&api_key=${import.meta.env.VITE_TMDB_KEY}&include_adult=false&language=en-US&page=1`
+    ).then((response) => {
+      if (!response.ok)
+        throw new Error(`Unable to retrieve person's details. Response status: ${response.status}`);
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+    });
+  }

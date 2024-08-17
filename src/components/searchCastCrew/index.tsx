@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { TextField, Button, Typography, List, ListItem, ListItemText, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import { MovieFormProps } from "../../types/interfaces";
+import { getPerson } from "../../api/tmdb-api";
 
 const SearchCastCrew: React.FC<MovieFormProps> = ({ fantasyMovie, setFantasyMovie }) => {
     const [query, setQuery] = useState("");
@@ -9,26 +10,34 @@ const SearchCastCrew: React.FC<MovieFormProps> = ({ fantasyMovie, setFantasyMovi
     const [characterOrRole, setCharacterRole] = useState("");
     const [dialogOpen, setDialogOpen] = useState(false);
 
-    const searchCastCrew = () => {
-        // For now, mock search results (replace this with an API call to fetch real data)
-    const mockResults = [
-        { id: 1, name: "John Doe", job: "Actor" },
-        { id: 2, name: "Jane Smith", job: "Director" },
-      ];
-      setResults(mockResults);
+    const searchCastCrew = async () => {
+    
+        try {
+            const searchResults = await getPerson(query); // make  API request
+      
+            // Ensure we are accessing the correct data structure and results array
+            if (searchResults && Array.isArray(searchResults.results)) {
+              setResults(searchResults.results);
+            } else {
+              setResults([]); // empty array if results are not found
+            }
+          } catch (error) {
+            console.error("Error fetching search results", error);
+          }
+    
     };
 
     const handleAddMember = () => {
-        if (selectedMember.job === "Actor") {
-            setFantasyMovie((prev: any) => ({
-                ...prev,
-                cast: [...prev.cast, { ...selectedMember, character: characterOrRole}],
-            }));
+        if (selectedMember?.known_for_department === "Acting") {
+          setFantasyMovie((prev: any) => ({
+            ...prev,
+            cast: [...prev.cast, { ...selectedMember, character: characterOrRole }],
+          }));
         } else {
-            setFantasyMovie((prev: any) => ({
-                ...prev,
-                crew: [...prev.crew, { ...selectedMember, role: characterOrRole}],
-            }));
+          setFantasyMovie((prev: any) => ({
+            ...prev,
+            crew: [...prev.crew, { ...selectedMember, role: characterOrRole }],
+          }));
         }
         setDialogOpen(false);
         setCharacterRole("");
@@ -56,22 +65,25 @@ const SearchCastCrew: React.FC<MovieFormProps> = ({ fantasyMovie, setFantasyMovi
       </Button>
       <List>
         {results.map((result) => (
-          <ListItem key={result.id} button onClick={() => handleMemberSelection(result)}>
-            <ListItemText primary={result.name} secondary={result.job} />
+          <ListItem key={result.id} onClick={() => handleMemberSelection(result)}>
+            <ListItemText
+              primary={result.name}
+              secondary={result.known_for_department} // Displays if they are an actor, director, etc.
+            />
           </ListItem>
         ))}
       </List>
 
-      {/* Dialog for char or role */}
+      {/* Dialog for entering character (for cast) or role (for crew) */}
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
         <DialogTitle>
-          {selectedMember?.job === "Actor" ? "Enter Character Name" : "Enter Role"}
+          {selectedMember?.known_for_department === "Acting" ? "Enter Character Name" : "Enter Role"}
         </DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            label={selectedMember?.job === "Actor" ? "Character" : "Role"}
+            label={selectedMember?.known_for_department === "Acting" ? "Character" : "Role"}
             fullWidth
             value={characterOrRole}
             onChange={(e) => setCharacterRole(e.target.value)}
