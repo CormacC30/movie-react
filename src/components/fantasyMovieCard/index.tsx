@@ -1,12 +1,14 @@
 import React from "react";
-import { Card, CardContent, Typography, Grid, Box, Chip } from "@mui/material";
+import { Card, CardContent, Typography, Grid, Box, Chip, CardActions, Button } from "@mui/material";
 import { FantasyMovie } from "../../types/interfaces";
 
 interface FantasyMovieCardProps {
     movie: FantasyMovie;
+    onEdit: () => void;
+    onDelete: () => void;
   }
 
-  const FantasyMovieCard: React.FC<FantasyMovieCardProps> = ({ movie }) => {
+  const FantasyMovieCard: React.FC<FantasyMovieCardProps> = ({ movie, onEdit, onDelete }) => {
     return (
       <Card sx={{ maxWidth: 345, margin: "10px" }}>
         <CardContent>
@@ -25,6 +27,14 @@ interface FantasyMovieCardProps {
             ))}
           </Box>
         </CardContent>
+        <CardActions>
+        <Button size="small" onClick={onEdit} variant="contained">
+          Edit
+        </Button>
+        <Button size="small" onClick={onDelete} variant="contained" color="error">
+          Delete
+        </Button>
+      </CardActions>
       </Card>
     );
   };
