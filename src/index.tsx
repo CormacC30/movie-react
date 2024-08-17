@@ -15,6 +15,10 @@ import TopRatedMoviesPage from "./pages/topRatedPage";
 import OnTheAirTVPage from "./pages/onTheAirPage";
 import ActorBiographyPage from "./pages/actorBioPage";
 import FantasyMoviePage from "./pages/fantasyMoviePage";
+import LoginPage from "./pages/loginPage"; 
+import SignupPage from "./pages/signUpPage"; 
+import AuthContextProvider from "./contexts/authContext";
+import PrivateRoute from "./routes/privateRoute";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,25 +34,29 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+      <AuthContextProvider>
         <MediaContextProvider>
         <SiteHeader />
           <Routes>
-            <Route path="/toprated" element={<TopRatedMoviesPage />} />
-            <Route path="/review/:type/:id" element={<AddMovieReviewPage />} /> { /* adding the type as a parameter in the url, type prop needed to discern movie vs tv  */}
-            <Route path="/reviews/:id" element={<MovieReviewPage />} /> { /* adding the type as a parameter in the url, type prop needed to discern movie vs tv  */}
+            <Route path="/toprated" element={<PrivateRoute component={TopRatedMoviesPage} />} />
+            <Route path="/review/:type/:id" element={<PrivateRoute component={AddMovieReviewPage} />} /> { /* adding the type as a parameter in the url, type prop needed to discern movie vs tv  */}
+            <Route path="/reviews/:id" element={<PrivateRoute component={MovieReviewPage}/>} /> { /* adding the type as a parameter in the url, type prop needed to discern movie vs tv  */}
             <Route
               path="/favourites"
               element={<FavouriteMediaPage />}
             />
-            <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-            <Route path="/details/:type/:id" element={<MediaPage />} /> {/* Parameterised the movie and the id */}
+            <Route path="/movies/upcoming" element={<PrivateRoute component={UpcomingMoviesPage} />} />
+            <Route path="/details/:type/:id" element={<PrivateRoute component={MediaPage} />} /> {/* Parameterised the movie and the id */}
             <Route path="/" element={<HomePage />} />
-            <Route path="/tv/on-the-air" element={<OnTheAirTVPage />} />
-            <Route path="/actor/:id" element={<ActorBiographyPage/>} />
-            <Route path="/fantasy-movie" element ={<FantasyMoviePage />}/>
+            <Route path="/tv/on-the-air" element={<PrivateRoute component={OnTheAirTVPage} />} />
+            <Route path="/actor/:id" element={<PrivateRoute component={ActorBiographyPage}/>} />
+            <Route path="/fantasy-movie" element ={<PrivateRoute component={FantasyMoviePage} />}/>
+            <Route path="/login" element={<LoginPage />} /> 
+            <Route path="/signup" element={<SignupPage />} /> 
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </MediaContextProvider>
+        </AuthContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
