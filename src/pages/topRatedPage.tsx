@@ -10,6 +10,7 @@ import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { MediaContext } from "../contexts/mediaContext";
+import MultiSearch from "../components/searchMoviesTV";
 
 const titleFiltering = {
   name: "title",
@@ -61,6 +62,7 @@ const TopRatedPage: React.FC = () => {
         <Tab label="Top Rated Movies" />
         <Tab label="Top Rated TV Series" />
       </Tabs>
+      <MultiSearch />
       <PageTemplate
         title={tabIndex === 0 ? "Top Rated Movies" : "Top Rated TV Series"}
         media={displayedMedia}

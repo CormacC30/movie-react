@@ -61,6 +61,9 @@ const MultiSearch: React.FC = () => {
 
   return (
     <div style={{
+        marginTop: "1%",
+        marginLeft: "30%",
+        marginBottom: "2%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

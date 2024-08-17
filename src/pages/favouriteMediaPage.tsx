@@ -14,6 +14,7 @@ import WriteReview from "../components/cardIcons/writeReview";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { BaseMediaProps } from "../types/interfaces";
+import MultiSearch from "../components/searchMoviesTV";
 
 const titleFiltering = {
   name: "title",
@@ -99,6 +100,7 @@ const FavouriteMoviesPage: React.FC = () => {
         <Tab label="Favourite Movies" />
         <Tab label="Favourite TV Series" />
       </Tabs>
+      <MultiSearch />
       <PageTemplate
         title={tabIndex === 0 ? "Favourite Movies" : "Favourite TV Series"}
         media={displayedMedia}

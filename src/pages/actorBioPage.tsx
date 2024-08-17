@@ -8,6 +8,7 @@ import CakeIcon from "@mui/icons-material/Cake";
 import PlaceIcon from "@mui/icons-material/Place";
 import Grid from "@mui/material/Grid";
 import ActorCredits from "../components/actorCredits";
+import MultiSearch from "../components/searchMoviesTV";
 
 const ActorBiographyPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,6 +27,7 @@ const ActorBiographyPage: React.FC = () => {
 
   return (
     <Paper elevation={3} sx={{ padding: "20px", margin: "20px" }}>
+      <MultiSearch />
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={8}>
           <Typography variant="h4" component="h2">

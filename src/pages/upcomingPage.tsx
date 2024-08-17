@@ -8,6 +8,7 @@ import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { IconButton } from "@mui/material";
 import { useMedia } from "../contexts/mediaContext";
+import MultiSearch from "../components/searchMoviesTV";
 
 const UpcomingMoviesPage: React.FC = () => {
   const {
@@ -36,6 +37,7 @@ const UpcomingMoviesPage: React.FC = () => {
 
   return (
     <>
+      <MultiSearch />
       <PageTemplate
         title="Upcoming Movies"
         media={media}

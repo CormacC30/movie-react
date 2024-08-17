@@ -7,6 +7,7 @@ import { getMovie, getTVShow } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import { MovieDetailsProps, TVSeriesDetailsProps } from "../types/interfaces";
+import MultiSearch from "../components/searchMoviesTV";
 
 const MediaDetailsPage: React.FC = () => {
   const { id, type } = useParams<{ id: string; type: string }>();
@@ -32,6 +33,7 @@ const MediaDetailsPage: React.FC = () => {
     <>
       {media ? (
         <>
+        <MultiSearch />
           <PageTemplate media={media} type={type}>
             <MovieDetails media={media} id={id} type={type} />
           </PageTemplate>

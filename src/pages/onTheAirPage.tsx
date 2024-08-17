@@ -8,6 +8,7 @@ import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { IconButton } from "@mui/material";
 import { useMedia } from "../contexts/mediaContext";
+import MultiSearch from "../components/searchMoviesTV";
 
 const OnTheAirTVPage: React.FC = () => {
   const {
@@ -34,6 +35,7 @@ const OnTheAirTVPage: React.FC = () => {
 
   return (
     <>
+      <MultiSearch />
       <PageTemplate
       title="On the Air"
       media={media}
