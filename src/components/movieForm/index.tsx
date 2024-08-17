@@ -1,18 +1,38 @@
-import React from "react";
+import React, {useEffect, useState } from "react";
 import { TextField, MenuItem, Select, FormControl, InputLabel, Typography } from "@mui/material";
 import { MovieFormProps } from "../../types/interfaces";
-
-// Mock list of genres
-const genres = [
-    { id: 28, name: "Action" },
-    { id: 35, name: "Comedy" },
-    { id: 878, name: "Science Fiction" },
-    { id: 18, name: "Drama" },
-    { id: 27, name: "Horror" },
-    // Add more genres as needed
-  ];
+import { getMovieGenres } from "../../api/tmdb-api";
+import Spinner from "../../components/spinner";
 
 const MovieForm: React.FC<MovieFormProps> = ({ fantasyMovie, setFantasyMovie }) => {
+
+    const [genres, setGenres] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+  
+    useEffect(() => {
+      const fetchGenres = async () => {
+        try {
+          const genreData = await getMovieGenres();
+          setGenres([{ id: "0", name: "All" }, ...genreData.genres]); // Add "All" option
+          setIsLoading(false);
+        } catch (err) {
+          setError("Failed to load genres");
+          setIsLoading(false);
+        }
+      };
+  
+      fetchGenres();
+    }, []); // Empty dependency array ensures this runs once on mount
+  
+    if (isLoading) {
+      return <Spinner />;
+    }
+  
+    if (error) {
+      return <h1>{error}</h1>;
+    }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFantasyMovie((prev: any) => ({ ...prev, [name]: value }));
