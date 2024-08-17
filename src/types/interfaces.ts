@@ -155,3 +155,17 @@ export interface BaseMediaProps {
     media_type: "movie" | "tv";
     poster_path?: string;
   }
+
+  export interface FantasyMovie {
+    title: string;
+    tagline: string;
+    overview: string;
+    genres: { id: number; name: string; }[];
+    cast: { id: number; name: string; character: string }[];
+    crew: { id: number; name: string; job: string }[];
+  }
+
+  export interface MovieFormProps {
+    fantasyMovie: any;
+    setFantasyMovie: React.Dispatch<React.SetStateAction<any>>;
+  }

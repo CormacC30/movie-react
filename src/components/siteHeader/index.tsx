@@ -34,8 +34,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
         { label: "Home", path: "/" },
         { label: "Favorites", path: "/favourites" },
         { label: "Top Rated", path: "/toprated" },
-      //  { label: "Upcoming Movies", path: "/movies/upcoming" },
-      //  { label: "On The Air", path: "/tv/on-the-air"},
+        { label: "Fantasy Movie", path: "/fantasy-movie"}
       ];
     const lastOption = tabIndex === 0  //conditional rendering the last menu optoin
     ? { label: "Upcoming Movies", path: "/movies/upcoming" }
