@@ -19,6 +19,7 @@ import LoginPage from "./pages/loginPage";
 import SignupPage from "./pages/signUpPage"; 
 import AuthContextProvider from "./contexts/authContext";
 import PrivateRoute from "./routes/privateRoute";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,8 +34,12 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
+      <Auth0Provider
+            domain={import.meta.env.VITE_AUTH0_DOMAIN}
+            clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+            redirectUri={window.location.origin}>
       <BrowserRouter>
-      <AuthContextProvider>
+
         <MediaContextProvider>
         <SiteHeader />
           <Routes>
@@ -47,7 +52,7 @@ const App = () => {
             />
             <Route path="/movies/upcoming" element={<PrivateRoute component={UpcomingMoviesPage} />} />
             <Route path="/details/:type/:id" element={<PrivateRoute component={MediaPage} />} /> {/* Parameterised the movie and the id */}
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<PrivateRoute component={HomePage} />} />
             <Route path="/tv/on-the-air" element={<PrivateRoute component={OnTheAirTVPage} />} />
             <Route path="/actor/:id" element={<PrivateRoute component={ActorBiographyPage}/>} />
             <Route path="/fantasy-movie" element ={<PrivateRoute component={FantasyMoviePage} />}/>
@@ -56,8 +61,9 @@ const App = () => {
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </MediaContextProvider>
-        </AuthContextProvider>
+
       </BrowserRouter>
+      </Auth0Provider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
