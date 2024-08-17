@@ -13,6 +13,7 @@ import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { MediaContext } from "../contexts/mediaContext";
+import MultiSearch from "../components/searchMoviesTV";
 
 const titleFiltering = {
   name: "title",
@@ -67,6 +68,7 @@ if (movieIsError) {
         <Tab label="Movies" />
         <Tab label="TV Series" />
       </Tabs>
+      <MultiSearch />
       <PageTemplate
         title={tabIndex === 0 ? "Discover Movies" : "Discover TV Series"}
         media={displayedMedia}

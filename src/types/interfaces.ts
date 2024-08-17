@@ -169,3 +169,11 @@ export interface BaseMediaProps {
     fantasyMovie: any;
     setFantasyMovie: React.Dispatch<React.SetStateAction<any>>;
   }
+  
+  export interface SearchResult {
+    id: number;
+    media_type: "movie" | "tv" | "person";
+    title?: string; // For movies
+    name?: string; // For TV shows and people
+    [key: string]: any;
+  }
