@@ -121,6 +121,13 @@ export interface BaseMediaProps {
     order: number;
     known_for?: BaseMediaProps[];
     job?: string;
+    crew?: CrewProps[];
+    type?: "movie" | "tv";
+  }
+
+  export interface ActorCardProps {
+    cast: CastProps;
+    action: (c: CastProps) => React.ReactNode;
   }
 
   export interface CrewProps{
@@ -135,7 +142,8 @@ export interface BaseMediaProps {
     credit_id: string;
     department: string;
     job: string;
-  }
+    cast?: CastProps[];
+   }
 
   export interface CreditsProps {
     cast: CastProps[];
@@ -171,8 +179,8 @@ export interface BaseMediaProps {
   }
 
   export interface MovieFormProps {
-    fantasyMovie: any;
-    setFantasyMovie: React.Dispatch<React.SetStateAction<any>>;
+    fantasyMovie: FantasyMovie;
+    setFantasyMovie: React.Dispatch<React.SetStateAction<unknown>>;
   }
   
   export interface SearchResult {
@@ -180,5 +188,5 @@ export interface BaseMediaProps {
     media_type: "movie" | "tv" | "person";
     title?: string; // For movies
     name?: string; // For TV shows and people
-    [key: string]: any;
+    [key: string]: unknown;
   }

@@ -41,7 +41,7 @@ const styles = {
 
 interface MediaDetailsProps {
   media: MovieDetailsProps | TVSeriesDetailsProps;
-  id: number | string;
+  id: string;
   type: "movie" | "tv";
   action: (m: BaseMediaProps) => React.ReactNode;
 }

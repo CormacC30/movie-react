@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import Actor from "../actorCard";
 import Grid from "@mui/material/Grid";
@@ -23,7 +24,9 @@ interface CastListProps {
         <Grid container spacing={2} justifyContent="center">
           {cast.map((c) => (
             <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-              <Actor cast={c} />
+              <Actor cast={c} action={function (_c: CastProps): React.ReactNode {
+                throw new Error("Function not implemented.");
+              } } />
             </Grid>
           ))}
         </Grid>

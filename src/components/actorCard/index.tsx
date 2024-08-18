@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png';
-import { CastProps } from "../../types/interfaces";
+import { ActorCardProps } from "../../types/interfaces";
 import { Link } from "react-router-dom";
 
 const styles = {
@@ -27,10 +27,6 @@ const styles = {
   }
 };
 
-  interface ActorCardProps {
-    cast: CastProps;
-    action: (c: CastProps) => React.ReactNode;
-  }
 
   const ActorCard: React.FC<ActorCardProps> = ({cast}) => { // action (add in here for link ot artist bio)
     

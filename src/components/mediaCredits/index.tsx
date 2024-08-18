@@ -4,7 +4,6 @@ import { getMovieCredits, getTVCredits } from "../../api/tmdb-api";
 import Spinner from "../spinner";
 import { Typography } from "@mui/material";
 import { useQuery } from "react-query";
-import Grid from "@mui/material/Grid";
 import CastList from "../castList";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -21,7 +20,7 @@ const styles = {
     }
 }
 
-const MediaCredits: React.FC<CreditsProps | CastProps> = ({ id, type }) => {
+const MediaCredits: React.FC<CreditsProps | CastProps | string | number| "tv" | "movie"> = ({ id, type }) => {
   const { data, error, isLoading, isError } = useQuery<
     { cast: CastProps[]; crew: CrewProps[] },
     Error

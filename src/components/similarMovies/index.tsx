@@ -10,7 +10,7 @@ import AddToFavouritesIcon from "../cardIcons/addToFavourites";
 
 interface SimilarMediaProps {
   type: 'movie' | 'tv';
-  id: number;
+  id: number | string;
 }
 
 const SimilarMovies: React.FC<SimilarMediaProps> = ({id, type}) => {
