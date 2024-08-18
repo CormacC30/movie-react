@@ -17,7 +17,6 @@ import ActorBiographyPage from "./pages/actorBioPage";
 import FantasyMoviePage from "./pages/fantasyMoviePage";
 import LoginPage from "./pages/loginPage"; 
 import SignupPage from "./pages/signUpPage"; 
-import AuthContextProvider from "./contexts/authContext";
 import PrivateRoute from "./routes/privateRoute";
 import { Auth0Provider } from "@auth0/auth0-react";
 
