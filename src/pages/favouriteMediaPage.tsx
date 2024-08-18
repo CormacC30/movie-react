@@ -28,10 +28,12 @@ const genreFiltering = {
 };
 
 // need this function - could get genres raw from the returned data
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const transformData = (media: any): BaseMediaProps => {
   return {
     ...media,
     genre_ids: media.genres
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ? media.genres.map((genre: any) => genre.id)
       : media.genre_ids,
   };

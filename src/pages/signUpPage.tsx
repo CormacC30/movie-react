@@ -9,7 +9,7 @@ const SignupPage: React.FC = () => {
 
   const handleSignup = () => {
     loginWithRedirect({
-      screen_hint: "signup", 
+    //  screen_hint: "signup", 
     });
   };
 

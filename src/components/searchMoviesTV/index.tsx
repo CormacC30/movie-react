@@ -41,12 +41,12 @@ const MultiSearch: React.FC = () => {
     }
   };
 
-  const handleInputChange = (_event: React.ChangeEvent<{}>, value: string) => {
+  const handleInputChange = (_event: React.ChangeEvent, value: string) => {
     handleSearch(value);
   };
 
   const handleSelect = (
-    event: React.SyntheticEvent<Element, Event>,
+    _event: React.SyntheticEvent<Element, Event>,
     value: string | SearchResult | null,
 
   ) => {

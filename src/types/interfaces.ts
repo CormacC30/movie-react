@@ -21,6 +21,7 @@ export interface BaseMediaProps {
     favourite?: boolean;
     genre_ids?: number[];
     backdrop_path?: string;
+    type?: "movie"| "tv"
   }
 
   export interface BaseMediaListProps {
@@ -184,7 +185,7 @@ export interface BaseMediaProps {
   }
   
   export interface SearchResult {
-    id: number;
+    id?: number;
     media_type: "movie" | "tv" | "person";
     title?: string; // For movies
     name?: string; // For TV shows and people

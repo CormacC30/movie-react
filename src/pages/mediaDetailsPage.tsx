@@ -10,7 +10,7 @@ import MultiSearch from "../components/searchMoviesTV";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 
 const MediaDetailsPage: React.FC = () => {
-  const { id, type } = useParams<{ id: string; type: string }>();
+  const { id, type } = useParams<{ id: string; type: "movie" | "tv" }>();
   const {
     data: media,
     error,

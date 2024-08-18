@@ -126,7 +126,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
 
                 {isAuthenticated ? (
                   <MenuItem
-                    onClick={() => logout({ returnTo: window.location.origin })}
+                    onClick={() => logout()}
                   >
                     Logout
                   </MenuItem>
@@ -176,7 +176,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
               {isAuthenticated ? (
                 <Button
                   variant="contained"
-                  onClick={() => logout({ returnTo: window.location.origin })}
+                  onClick={() => logout()}
                 >
                   Logout
                 </Button>
