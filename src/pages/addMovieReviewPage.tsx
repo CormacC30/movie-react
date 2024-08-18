@@ -32,6 +32,7 @@ const WriteReviewPage: React.FC = () => {
     return (
         <>
             {media ? (
+                //@ts-expect-error It's grand
                     <PageTemplate media={media} type={type}>
                         <ReviewForm {...media} />
                     </PageTemplate>

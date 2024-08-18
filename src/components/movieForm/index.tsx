@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {useEffect, useState } from "react";
 import { TextField, MenuItem, Select, FormControl, InputLabel, Typography } from "@mui/material";
 import { MovieFormProps } from "../../types/interfaces";

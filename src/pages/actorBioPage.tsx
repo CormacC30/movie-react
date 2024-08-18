@@ -21,7 +21,7 @@ const ActorBiographyPage: React.FC = () => {
   } = useQuery(["actor", id], () => getActorDetails(id || ""));
 
   if (isLoading) return <Spinner />;
-  //@ts-ignore
+  //@ts-expect-error It's grand
   if (isError) return <Typography variant="h6">{error.message}</Typography>;
 
   const image_path = actor.profile_path;
@@ -50,7 +50,7 @@ const ActorBiographyPage: React.FC = () => {
             <br />
             {actor.biography}
           </Typography>
-         { /* @ts-ignore */ }
+         { /* @ts-expect-error It's grand*/ }
           <ActorCredits id={actor.id}/>
         </Grid>
         <Grid item xs={4}>

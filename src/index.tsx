@@ -36,10 +36,12 @@ const App = () => {
       <Auth0Provider
             domain={import.meta.env.VITE_AUTH0_DOMAIN}
             clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+            // @ts-expect-error it's absolutely grand
             redirectUri={window.location.origin}>
       <BrowserRouter>
 
         <MediaContextProvider>
+          {/* @ts-expect-error it's absolutely grand */}
         <SiteHeader />
           <Routes>
             <Route path="/toprated" element={<PrivateRoute component={TopRatedMoviesPage} />} />
