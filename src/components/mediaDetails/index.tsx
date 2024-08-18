@@ -17,8 +17,7 @@ import MovieReviews from "../movieReviews";
 import SimilarMovies from "../similarMovies";
 import MediaCredits from "../mediaCredits";
 import Grid from "@mui/material/Grid";
-import AddToFavouritesIcon from "../cardIcons/addToFavourites";
-import { MediaContext } from "../../contexts/mediaContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const styles = {
   chipSet: {
@@ -50,6 +49,7 @@ interface MediaDetailsProps {
 const MediaDetails: React.FC<MediaDetailsProps> = ({ media, id, type, action }) => {
   
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const {isAuthenticated} = useAuth0();
 
   return (
     <>
@@ -60,7 +60,8 @@ const MediaDetails: React.FC<MediaDetailsProps> = ({ media, id, type, action }) 
       </Typography>
       </Grid>
       <Grid item xs={3} maxWidth="flex">
-      {action(media)} {/*<AddToFavouritesIcon media={media}/>*/}
+      { isAuthenticated ? action(media) : null} 
+      
       </Grid>
     </Grid>
 

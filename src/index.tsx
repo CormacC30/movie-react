@@ -51,10 +51,10 @@ const App = () => {
               element={<PrivateRoute component={FavouriteMediaPage} />}
             />
             <Route path="/movies/upcoming" element={<PrivateRoute component={UpcomingMoviesPage} />} />
-            <Route path="/details/:type/:id" element={<PrivateRoute component={MediaPage} />} /> {/* Parameterised the movie and the id */}
+            <Route path="/details/:type/:id" element={<MediaPage />} /> {/* Parameterised the movie and the id */}
             <Route path="/" element={<PrivateRoute component={HomePage} />} />
             <Route path="/tv/on-the-air" element={<PrivateRoute component={OnTheAirTVPage} />} />
-            <Route path="/actor/:id" element={<PrivateRoute component={ActorBiographyPage}/>} />
+            <Route path="/actor/:id" element={<ActorBiographyPage/>} />
             <Route path="/fantasy-movie" element ={<PrivateRoute component={FantasyMoviePage} />}/>
             <Route path="/login" element={<LoginPage />} /> 
             <Route path="/signup" element={<SignupPage />} /> 
