@@ -1,13 +1,13 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 const LoginPage: React.FC = () => {
   const { loginWithRedirect } = useAuth0();
 
   return (
     <div style={{ textAlign: "center", marginTop: "20vh" }}>
-      <h1>Login</h1>
+      <Typography variant="h2" style={{marginBottom: "2%"}}>Login</Typography>
       <Button variant="contained" color="primary" onClick={() => loginWithRedirect()}>
         Log in with Auth0
       </Button>

@@ -48,7 +48,7 @@ const App = () => {
             <Route path="/reviews/:id" element={<PrivateRoute component={MovieReviewPage}/>} /> { /* adding the type as a parameter in the url, type prop needed to discern movie vs tv  */}
             <Route
               path="/favourites"
-              element={<FavouriteMediaPage />}
+              element={<PrivateRoute component={FavouriteMediaPage} />}
             />
             <Route path="/movies/upcoming" element={<PrivateRoute component={UpcomingMoviesPage} />} />
             <Route path="/details/:type/:id" element={<PrivateRoute component={MediaPage} />} /> {/* Parameterised the movie and the id */}
