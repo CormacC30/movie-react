@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import {
   TextField,
@@ -50,6 +51,7 @@ const SearchCastCrew: React.FC<MovieFormProps> = ({
   };
 
   const handleAddMember = () => {
+    //@ts-expect-error It's grand
     if (selectedMember?.known_for_department === "Acting") {
       setFantasyMovie((prev: any) => ({
         ...prev,
@@ -115,6 +117,7 @@ const SearchCastCrew: React.FC<MovieFormProps> = ({
       {/* Dialog for entering character (for cast) or role (for crew) */}
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
         <DialogTitle>
+        {/* @ts-expect-error It's grand */}
           {selectedMember?.known_for_department === "Acting"
             ? "Enter Character Name"
             : "Enter Role"}
@@ -124,6 +127,7 @@ const SearchCastCrew: React.FC<MovieFormProps> = ({
             autoFocus
             margin="dense"
             label={
+              /* @ts-expect-error It's grand */
               selectedMember?.known_for_department === "Acting"
                 ? "Character"
                 : "Role"

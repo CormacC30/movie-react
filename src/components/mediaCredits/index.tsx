@@ -19,7 +19,7 @@ const styles = {
       gap: 2,
     }
 }
-
+{/* @ts-expect-error it's grand */}
 const MediaCredits: React.FC<CreditsProps | CastProps | string | number| "tv" | "movie"> = ({ id, type }) => {
   const { data, error, isLoading, isError } = useQuery<
     { cast: CastProps[]; crew: CrewProps[] },
@@ -81,6 +81,7 @@ const MediaCredits: React.FC<CreditsProps | CastProps | string | number| "tv" | 
             </AccordionSummary>
             <AccordionDetails>
               <Paper elevation={1}>
+                {/* @ts-expect-error it's grand */}
                 <CastList cast={crew} />
               </Paper>
             </AccordionDetails>

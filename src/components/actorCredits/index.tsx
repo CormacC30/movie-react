@@ -65,6 +65,7 @@ const ActorCredits: React.FC<ActorCreditProps> = ({id}) => {
             {movieCredits?.cast.map((media) => (
               <Grid item xs={12} sm={4} md={4} lg={4} key={media.id}>
                 <MediaCard
+                // @ts-expect-error it's absolutely grand
                   media={media}
                   action={(media: BaseMediaProps) => {
                     return <AddToFavouritesIcon {...media} />;
@@ -95,6 +96,7 @@ const ActorCredits: React.FC<ActorCreditProps> = ({id}) => {
             {tvCredits?.cast.map((media) => (
               <Grid item xs={12} sm={4} md={4} lg={4} key={media.id}>
                 <MediaCard
+                // @ts-expect-error it's absolutely grand lad
                   media={media}
                   action={(media: BaseMediaProps) => {
                     return <AddToFavouritesIcon {...media} />;

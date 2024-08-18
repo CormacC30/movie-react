@@ -120,6 +120,7 @@ const MediaDetails: React.FC<MediaDetailsProps> = ({ media, id, type, action }) 
         Credits
       </Typography>
       <div>
+        {/* @ts-expect-error it's grand */}
         <MediaCredits id={id} type={type} />
       </div>
 

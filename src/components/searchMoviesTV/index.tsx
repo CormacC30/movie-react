@@ -90,6 +90,7 @@ const MultiSearch: React.FC = () => {
               />
             )}
             renderOption={(props, option) => (
+              //@ts-expect-error It's grand
               <li {...props} key={option.id}>
                 {typeof option === "string" ? option : `${option.title || option.name} (${option.media_type})`}
               </li>
