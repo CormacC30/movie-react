@@ -58,6 +58,7 @@ const App = () => {
             <Route path="/fantasy-movie" element ={<PrivateRoute component={FantasyMoviePage} />}/>
             <Route path="/login" element={<LoginPage />} /> 
             <Route path="/signup" element={<SignupPage />} /> 
+            <Route path="/signup" element={<SignupPage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </MediaContextProvider>
