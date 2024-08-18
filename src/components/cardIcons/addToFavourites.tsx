@@ -6,10 +6,22 @@ import {BaseMediaProps} from "../../types/interfaces"
 
 const AddToFavouritesIcon: React.FC<BaseMediaProps> = (movie) => {
   const context = useContext(MediaContext);
+  const { favouriteMovies, favouriteTVSeries } = useContext(MediaContext);
+
+    const isFavourite = movie.title
+    ? favouriteMovies.includes(movie.id)
+    : favouriteTVSeries.includes(movie.id);
 
   const onUserSelect = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    context.addToFavourites(movie);
+
+    if (!isFavourite){
+      e.preventDefault();
+      context.addToFavourites(movie);
+    } else {
+      e.preventDefault();
+      context.removeFromFavourites(movie);
+    }
+
   };
   return (
     <IconButton aria-label="add to favorites" onClick={onUserSelect}>
