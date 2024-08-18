@@ -11,7 +11,6 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useMedia } from "../../contexts/mediaContext";
 import { MediaContext } from "../../contexts/mediaContext";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -36,17 +35,10 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const { tabIndex } = useContext(MediaContext);
 
-  // const menuOptions = [
-  //   { label: "Home", path: "/" },
-  //   { label: "Favorites", path: "/favourites" },
-  //   { label: "Top Rated", path: "/toprated" },
-  //   { label: "Fantasy Movie", path: "/fantasy-movie" },
-  // ];
 
-  // Public routes (available to all users)
   const publicMenuOptions = [{ label: "Home", path: "/" }];
 
-  // Protected routes (only available when authenticated)
+
   const protectedMenuOptions = [
     { label: "Fantasy Movie", path: "/fantasy-movie" },
     { label: "Favorites", path: "/favourites" },

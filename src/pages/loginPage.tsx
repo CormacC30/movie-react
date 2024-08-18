@@ -3,7 +3,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Typography } from "@mui/material";
 import MultiSearch from "../components/searchMoviesTV";
 import {Link} from "react-router-dom";
-import { PaddingRounded } from "@mui/icons-material";
 
 const LoginPage: React.FC = () => {
   const { loginWithRedirect } = useAuth0();

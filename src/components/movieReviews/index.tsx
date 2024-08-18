@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -55,7 +55,7 @@ const MovieReviews: React.FC<MovieReviewsProps> = ({media, id, type}) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {reviews.map((r: Review) => (
+                    {reviews?.map((r: Review) => (
                         <TableRow key={r.id}>
                             <TableCell component="th" scope="row">
                                 {r.author}

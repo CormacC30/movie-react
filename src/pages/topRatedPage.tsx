@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { DiscoverMedia, BaseMediaProps } from "../types/interfaces";
 import { getTopRatedMovies, getTopRatedTVSeries } from "../api/tmdb-api";
@@ -36,6 +36,7 @@ const TopRatedPage: React.FC = () => {
   const error = tabIndex === 0 ? movieError : tvError;
   const media = tabIndex === 0 ? movieData?.results : tvData?.results;
 
+  console.log(media);
   if (isLoading) {
     return <Spinner />;
   }
@@ -58,7 +59,7 @@ const TopRatedPage: React.FC = () => {
 
   return (
     <>
-      <Tabs value={tabIndex} onChange={(event, newValue) => setTabIndex(newValue)}>
+      <Tabs value={tabIndex} onChange={(_event, newValue) => setTabIndex(newValue)}>
         <Tab label="Top Rated Movies" />
         <Tab label="Top Rated TV Series" />
       </Tabs>

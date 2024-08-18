@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, Typography, Grid, Box, Chip, CardActions, Button } from "@mui/material";
+import { Card, CardContent, Typography, Box, Chip, CardActions, Button } from "@mui/material";
 import { FantasyMovie } from "../../types/interfaces";
 
 interface FantasyMovieCardProps {

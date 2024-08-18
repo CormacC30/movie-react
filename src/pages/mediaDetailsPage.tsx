@@ -1,7 +1,6 @@
 import React from "react"; // replace existing react import
 import { useParams } from "react-router-dom";
 import MovieDetails from "../components/mediaDetails";
-import { Typography } from "@mui/material";
 import PageTemplate from "../components/templateMediaPage";
 import { getMovie, getTVShow } from "../api/tmdb-api";
 import { useQuery } from "react-query";

@@ -1,20 +1,15 @@
 import React from "react";
 import PageTemplate from "../components/templateMediaPage";
 import ReviewForm from "../components/reviewForm";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getMovie, getTVShow } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
-import { BaseMediaProps, MovieDetailsProps } from "../types/interfaces";
-
-interface RouteParams {
-    type: string;
-    id: string;
-  }
+import { BaseMediaProps} from "../types/interfaces";
 
 const WriteReviewPage: React.FC = () => {
     //const location = useLocation();
-    const {type, id}= useParams<RouteParams>();
+    const {type, id}= useParams<string>();
  
    // const { id } = location.state;
 

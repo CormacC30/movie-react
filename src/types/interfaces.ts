@@ -154,6 +154,11 @@ export interface BaseMediaProps {
     first_air_date?: string;
     media_type: "movie" | "tv";
     poster_path?: string;
+    original_language?: string;
+    overview?: string;
+    vote_average: number;
+    popularity: number;
+    vote_count: number;
   }
 
   export interface FantasyMovie {

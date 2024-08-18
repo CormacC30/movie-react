@@ -1,7 +1,7 @@
 import React from "react";
 import Actor from "../actorCard";
 import Grid from "@mui/material/Grid";
-import { CastProps, CreditsProps } from "../../types/interfaces";
+import { CastProps } from "../../types/interfaces";
 import Box from "@mui/material/Box";
 
 interface CastListProps {

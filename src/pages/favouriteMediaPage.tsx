@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { MediaContext } from "../contexts/mediaContext";
-import { useQueries, useQuery } from "react-query";
+import { useQueries } from "react-query";
 import { getMovie, getTVShow } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
@@ -95,7 +95,7 @@ const FavouriteMoviesPage: React.FC = () => {
     <>
       <Tabs
         value={tabIndex}
-        onChange={(event, newValue) => setTabIndex(newValue)}
+        onChange={(_event, newValue) => setTabIndex(newValue)}
       >
         <Tab label="Favourite Movies" />
         <Tab label="Favourite TV Series" />

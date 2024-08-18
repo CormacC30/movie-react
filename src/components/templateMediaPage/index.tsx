@@ -11,7 +11,6 @@ import {
 } from "../../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from "../spinner";
-import { useParams } from "react-router-dom";
 
 const styles = {
   gridListRoot: {

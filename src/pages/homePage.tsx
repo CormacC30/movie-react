@@ -64,7 +64,7 @@ if (movieIsError) {
 
   return (
     <>
-      <Tabs value={tabIndex} onChange={(event, newValue) => setTabIndex(newValue)}>
+      <Tabs value={tabIndex} onChange={(_event, newValue) => setTabIndex(newValue)}>
         <Tab label="Movies" />
         <Tab label="TV Series" />
       </Tabs>

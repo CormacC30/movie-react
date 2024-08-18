@@ -17,7 +17,7 @@ import { MovieFormProps } from "../../types/interfaces";
 import { getPerson } from "../../api/tmdb-api";
 
 const SearchCastCrew: React.FC<MovieFormProps> = ({
-  fantasyMovie,
+
   setFantasyMovie,
 }) => {
   const [query, setQuery] = useState("");

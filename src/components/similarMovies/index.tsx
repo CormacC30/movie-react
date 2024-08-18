@@ -1,9 +1,8 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { BaseMediaListProps, BaseMediaProps } from "../../types/interfaces";
+import { BaseMediaProps } from "../../types/interfaces";
 import { Typography } from "@mui/material";
 import { getSimilarMovies, getSimilarTVShows } from "../../api/tmdb-api";
-import { PageTemplate } from "../templateMovieListPage";
 import Spinner from "../spinner";
 import MediaCard from "../mediaCard";
 import Grid from "@mui/material/Grid";
@@ -34,7 +33,7 @@ const {data, error, isLoading, isError} =useQuery<BaseMediaProps[], Error>(
     <div style={{ marginTop: "40px" }}>
 
     <Grid container spacing={2}>
-    {data.map((media) => (
+    {data?.map((media) => (
         <Grid item xs={12} sm={4} md={4} lg={4} key={media.id}>
           <MediaCard media={media} action={(media: BaseMediaProps) => {
           return <AddToFavouritesIcon {...media} />

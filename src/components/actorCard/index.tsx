@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React from "react"
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -6,16 +6,11 @@ import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png';
 import { CastProps } from "../../types/interfaces";
 import { Link } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import { MediaContext } from "../../contexts/mediaContext";
-import { useNavigate } from "react-router-dom";
 
 const styles = {
   card: { maxWidth: "auto", margin: "auto" },
@@ -39,28 +34,10 @@ const styles = {
 
   const ActorCard: React.FC<ActorCardProps> = ({cast}) => { // action (add in here for link ot artist bio)
     
-    /* 
-   ---- PLACEHOLDER ----
-
-const { favouriteActor } = useContext(MediaContext); // delete unless context will be used
-
-    const isFavourite = favouriteActor.includes(cast.id)
-   
-  if (favouriteActor.find((id) => id === cast.id)) 
-    cast.favourite = true;
-
-    */
 
   const role = cast.known_for_department === "Acting" ? cast.character : cast.job;
 
   const name= cast.name;
-
-  const navigate = useNavigate();
-  console.log("persons id: ", cast.id);
-
-  const handleClick = () => {
-    navigate(`/actor/${cast.id}`)
-  }
 
   return (
     <Card sx={styles.card} >
