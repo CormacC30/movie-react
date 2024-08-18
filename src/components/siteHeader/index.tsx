@@ -36,12 +36,23 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const { tabIndex } = useContext(MediaContext);
 
-  const menuOptions = [
-    { label: "Home", path: "/" },
+  // const menuOptions = [
+  //   { label: "Home", path: "/" },
+  //   { label: "Favorites", path: "/favourites" },
+  //   { label: "Top Rated", path: "/toprated" },
+  //   { label: "Fantasy Movie", path: "/fantasy-movie" },
+  // ];
+
+  // Public routes (available to all users)
+  const publicMenuOptions = [{ label: "Home", path: "/" }];
+
+  // Protected routes (only available when authenticated)
+  const protectedMenuOptions = [
+    { label: "Fantasy Movie", path: "/fantasy-movie" },
     { label: "Favorites", path: "/favourites" },
     { label: "Top Rated", path: "/toprated" },
-    { label: "Fantasy Movie", path: "/fantasy-movie" },
   ];
+
   const lastOption =
     tabIndex === 0 //conditional rendering the last menu optoin
       ? { label: "Upcoming Movies", path: "/movies/upcoming" }
@@ -95,7 +106,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
                 open={open}
                 onClose={() => setAnchorEl(null)}
               >
-                {menuOptions.map((opt) => (
+                {publicMenuOptions.map((opt) => (
                   <MenuItem
                     key={opt.label}
                     onClick={() => handleMenuSelect(opt.path)}
@@ -103,12 +114,24 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
                     {opt.label}
                   </MenuItem>
                 ))}
-                <MenuItem
-                  key={lastOption.label}
-                  onClick={() => handleMenuSelect(lastOption.path)}
-                >
-                  {lastOption.label}
-                </MenuItem>
+                {isAuthenticated &&
+                  protectedMenuOptions.map((opt) => (
+                    <MenuItem
+                      key={opt.label}
+                      onClick={() => handleMenuSelect(opt.path)}
+                    >
+                      {opt.label}
+                    </MenuItem>
+                  ))}
+                {isAuthenticated && (
+                  <MenuItem
+                    key={lastOption.label}
+                    onClick={() => handleMenuSelect(lastOption.path)}
+                  >
+                    {lastOption.label}
+                  </MenuItem>
+                )}
+
                 {isAuthenticated ? (
                   <MenuItem
                     onClick={() => logout({ returnTo: window.location.origin })}
@@ -116,13 +139,20 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
                     Logout
                   </MenuItem>
                 ) : (
-                  <MenuItem onClick={() => loginWithRedirect()}>Login</MenuItem>
+                  <>
+                    <MenuItem onClick={() => loginWithRedirect()}>
+                      Login
+                    </MenuItem>
+                    <MenuItem onClick={() => navigate("/signup")}>
+                      Sign Up
+                    </MenuItem>
+                  </>
                 )}
               </Menu>
             </>
           ) : (
             <>
-              {menuOptions.map((opt) => (
+              {publicMenuOptions.map((opt) => (
                 <Button
                   key={opt.label}
                   color="inherit"
@@ -131,13 +161,26 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
                   {opt.label}
                 </Button>
               ))}
-              <Button
-                key={lastOption.label}
-                color="inherit"
-                onClick={() => handleMenuSelect(lastOption.path)}
-              >
-                {lastOption.label}
-              </Button>
+              {isAuthenticated &&
+                protectedMenuOptions.map((opt) => (
+                  <Button
+                    key={opt.label}
+                    color="inherit"
+                    onClick={() => handleMenuSelect(opt.path)}
+                  >
+                    {opt.label}
+                  </Button>
+                ))}
+              {isAuthenticated && (
+                <Button
+                  key={lastOption.label}
+                  color="inherit"
+                  onClick={() => handleMenuSelect(lastOption.path)}
+                >
+                  {lastOption.label}
+                </Button>
+              )}
+
               {isAuthenticated ? (
                 <Button
                   variant="contained"
@@ -146,13 +189,21 @@ const SiteHeader: React.FC<SiteHeaderProps> = () => {
                   Logout
                 </Button>
               ) : (
-                <Button variant="contained" onClick={() => loginWithRedirect()}>
-                  Login
-                </Button>
+                <>
+                  <Button
+                    variant="contained"
+                    onClick={() => loginWithRedirect()}
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    variant="contained"
+                    onClick={() => navigate("/signup")}
+                  >
+                    Sign Up
+                  </Button>
+                </>
               )}
-              <Button variant="contained" onClick={() => navigate("/signup")}>
-                Sign Up
-              </Button>
             </>
           )}
         </Toolbar>
