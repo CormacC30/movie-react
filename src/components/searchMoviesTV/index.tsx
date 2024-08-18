@@ -27,12 +27,11 @@ const MultiSearch: React.FC = () => {
     try {
         console.log(`Fetching results for: ${searchTerm}`);
         const response = await searchMulti(searchTerm);
-        console.log('API Response:', response);
-    
+            
         if (response.results) {
           setResults(response.results);
         } else {
-          throw new Error('Invalid API response structure');
+          throw new Error('Invalid API response ');
         }
       } catch (err) {
         console.error(err.message);

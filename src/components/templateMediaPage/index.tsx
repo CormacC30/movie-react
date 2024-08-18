@@ -54,7 +54,7 @@ const TemplateMediaPage: React.FC<TemplateMediaPageProps> = ({
   }
 
   const images = data as MovieImage[];
-console.log("TYYYYPE:", type);
+
   return (
     <>
       <MovieHeader {...media}/>

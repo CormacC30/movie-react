@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import {
   MovieDetailsProps,
   TVSeriesDetailsProps,
+  BaseMediaProps
 } from "../../types/interfaces";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
@@ -15,6 +16,9 @@ import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
 import SimilarMovies from "../similarMovies";
 import MediaCredits from "../mediaCredits";
+import Grid from "@mui/material/Grid";
+import AddToFavouritesIcon from "../cardIcons/addToFavourites";
+import { MediaContext } from "../../contexts/mediaContext";
 
 const styles = {
   chipSet: {
@@ -40,16 +44,26 @@ interface MediaDetailsProps {
   media: MovieDetailsProps | TVSeriesDetailsProps;
   id: number | string;
   type: "movie" | "tv";
+  action: (m: BaseMediaProps) => React.ReactNode;
 }
 
-const MediaDetails: React.FC<MediaDetailsProps> = ({ media, id, type }) => {
+const MediaDetails: React.FC<MediaDetailsProps> = ({ media, id, type, action }) => {
+  
   const [drawerOpen, setDrawerOpen] = useState(false);
-  // console.log("mEdIa ", media);
+
   return (
     <>
-      <Typography variant="h5" component="h3">
+    <Grid container spacing="5px">
+      <Grid item xs={9} maxWidth="flex" >
+      <Typography variant="h4" component="h3" textAlign="center">
         Overview
       </Typography>
+      </Grid>
+      <Grid item xs={3} maxWidth="flex">
+      {action(media)} {/*<AddToFavouritesIcon media={media}/>*/}
+      </Grid>
+    </Grid>
+
 
       <Typography variant="h6" component="p">
         {media.overview}
