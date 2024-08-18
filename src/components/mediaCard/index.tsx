@@ -16,6 +16,7 @@ import { BaseMediaProps } from "../../types/interfaces";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { MediaContext } from "../../contexts/mediaContext"; // Adjust the context if needed
+import { useAuth0 } from "@auth0/auth0-react";
 
 const styles = {
   card: { maxWidth: 345 },
@@ -31,6 +32,7 @@ interface MediaCardProps {
 }
 
 const MediaCard: React.FC<MediaCardProps> = ({ media, action }) => {
+  const {isAuthenticated} = useAuth0()
   const { favouriteMovies, favouriteTVSeries } = useContext(MediaContext);
 
     const isFavourite = media.title
@@ -87,7 +89,7 @@ const MediaCard: React.FC<MediaCardProps> = ({ media, action }) => {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        {action(media)}
+      { isAuthenticated ? action(media) : null} 
         <Link to={`/details/${media.title ? "movie" : "tv"}/${media.id}`}> 
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
